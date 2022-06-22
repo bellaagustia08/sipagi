@@ -30,10 +30,9 @@
 <button id="buttonTambah" type="button" class="btn btn-circle mb-2" data-bs-toggle="modal" data-bs-target="#tambahModal">
     <span data-feather="plus-circle"></span> Tambah Pasien
 </button>
-<a style="float: right;" class="nav-link" href="<?= base_url(); ?>/pasien">
+<!-- <a style="float: right;" class="nav-link" href="<?= base_url(); ?>/pasien">
     <span data-feather="refresh-ccw"></span> Muat Ulang
-</a>
-
+</a> -->
 <br><br>
 
 <table id="table-datatables" class="table table-hover row-border">
@@ -65,8 +64,8 @@
                 <td align="center"><?php echo $row->umur_pasien ?> Tahun</td>
                 <td align="center"><?php echo $row->jenis_kelamin_pasien ?></td>
                 <td style="width: 15%;" align="center">
-                    <a class="btn btn-primary btn-sm btn-edit-pasien" data-id_pasien="<?= $row->id_pasien; ?>" data-nama_pasien="<?= $row->nama_pasien; ?>" data-username_pasien="<?= $row->username_pasien; ?>" data-alamat_pasien="<?= $row->alamat_pasien; ?>" data-no_telp_pasien="<?= $row->no_telp_pasien; ?>" data-tanggal_lahir_pasien="<?= $row->tanggal_lahir_pasien; ?>" data-umur_pasien="<?= $row->umur_pasien; ?>" data-jenis_kelamin_pasien="<?= $row->jenis_kelamin_pasien; ?>">Ubah</a>
-                    <a class="btn btn-danger btn-sm btn-delete-pasien" data-id_pasien="<?= $row->id_pasien; ?>">Hapus</a>
+                    <a style="width: 60px ;" class="btn btn-primary btn-sm btn-edit-pasien" data-id_pasien="<?= $row->id_pasien; ?>" data-nama_pasien="<?= $row->nama_pasien; ?>" data-username_pasien="<?= $row->username_pasien; ?>" data-alamat_pasien="<?= $row->alamat_pasien; ?>" data-no_telp_pasien="<?= $row->no_telp_pasien; ?>" data-tanggal_lahir_pasien="<?= $row->tanggal_lahir_pasien; ?>" data-umur_pasien="<?= $row->umur_pasien; ?>" data-jenis_kelamin_pasien="<?= $row->jenis_kelamin_pasien; ?>">Ubah</a>
+                    <a style="width: 60px ;" class="btn btn-danger btn-sm btn-delete-pasien" data-id_pasien="<?= $row->id_pasien; ?>">Hapus</a>
                 </td>
             </tr>
         <?php } ?>

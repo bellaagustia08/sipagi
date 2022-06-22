@@ -111,7 +111,7 @@
             ?>
                 <h6>
                     <input type="checkbox" id="checkboxDokter" name="checkboxDokter[]" value="<?php echo $row->id_dokter ?>" <?php echo set_checkbox('checkboxDokter[]', $row->id_dokter); ?>>
-                    &nbsp; <?php echo $hitung ?> . <?php echo $row->nama_dokter ?>
+                    <label for="id_dokter"><?php echo $row->nama_dokter ?></label>
                 </h6>
             <?php
             }
@@ -123,10 +123,6 @@
 
         <?php
         if (isset($_GET['checkboxDokter'])) {
-            // $checkboxDokter = $_GET['checkboxDokter'];
-            // // dd($checkboxDokter);
-            // echo 'Id. Dokter : ';
-            // print_r($checkboxDokter[0]);
         ?>
 
             <?php if (!empty(session()->getFlashdata('warning2'))) : ?>
@@ -150,6 +146,7 @@
                         <h3>Jadwal Janji Temu <?php echo $nama_dokter;  ?></h3>
                     </div>
                     <br>
+
                     <?php
                     $hitung = 0;
                     foreach ($jadwal as $row) {
@@ -166,8 +163,8 @@
                     <?php
                             }
                         }
-                    } ?>
-
+                    }
+                    ?>
                     <br>
                 </div>
                 <br>
@@ -223,7 +220,7 @@
                             </div>
                             <h6>Umur</h6>
                             <div class="form-floating mb-3">
-                                <input type="number" class="form-control" name="umur" id="umur" required autofocus value="<?= set_value('umur') ?>">
+                                <input type="number" class="form-control" name="umur" id="umur" required autofocus value="<?= set_value('umur') ?>" onkeypress="return hanyaAngka(event)">
                                 <label>Masukan Umur &nbsp;<b style="color: red; font-size:large;">*</b></label>
                             </div>
                             <br>
@@ -275,7 +272,7 @@
                 ?>
                     <h6>
                         <input type="checkbox" name="checkboxDokter[]" id="checkboxDokter" value="<?php echo $temp['id_dokter'] ?>">
-                        &nbsp; <?php echo $hitung ?> . <?php echo $temp['nama_dokter'] ?>
+                        <label for="id_dokter"><?php echo $temp['nama_dokter'] ?></label>
                     </h6>
                 <?php
                 }

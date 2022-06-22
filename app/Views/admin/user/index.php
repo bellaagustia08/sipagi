@@ -54,8 +54,8 @@
                 <td style="width:26%;" align="center"><?php echo $row->role ?></td>
                 <td style="width:26%;" align="center"><?php echo $row->status ?></td>
                 <td style="width: 17%;" align="center">
-                    <a class="btn btn-primary btn-sm btn-edit-user" data-id_user="<?= $row->id_user; ?>" data-nama_lengkap="<?= $row->nama_lengkap; ?>" data-role="<?= $row->role; ?>" data-status="<?= $row->status; ?>">Ubah</a>
-                    <a class="btn btn-danger btn-sm btn-delete-user" data-id_user="<?= $row->id_user; ?>">Hapus</a>
+                    <a style="width: 60px ;" class="btn btn-primary btn-sm btn-edit-user" data-id_user="<?= $row->id_user; ?>" data-nama_lengkap="<?= $row->nama_lengkap; ?>" data-role="<?= $row->role; ?>" data-status="<?= $row->status; ?>">Ubah</a>
+                    <a style="width: 60px ;" class="btn btn-danger btn-sm btn-delete-user" data-id_user="<?= $row->id_user; ?>">Hapus</a>
                 </td>
             </tr>
         <?php } ?>

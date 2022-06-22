@@ -183,21 +183,6 @@
             border-radius: 3px;
         }
 
-        /* #buttonCariRiwayat {
-            width: 20%;
-            position: relative;
-            padding: 6px 15px;
-            margin-top: 0%;
-            border: 2px solid #827397;
-            background-color: #FFD365;
-            color: black;
-        }
-
-        #buttonCariRiwayat:hover {
-            background-color: whitesmoke;
-            color: black;
-        } */
-
         /* style table */
         th {
             text-align: center;
@@ -239,7 +224,11 @@
                 responsive: true,
                 stateSave: true,
                 pageLength: 100,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.12.1/i18n/id.json"
+                }
             });
+
             $('.btn-detail-riwayat').on('click', function() {
                 // get data from button edit
                 const id_konsultasi = $(this).data('id_konsultasi');
@@ -285,16 +274,6 @@
 
         function goReload() {
             location.reload()
-        }
-
-        function run() {
-            var username_pasien = document.getElementById("username_pasien");
-
-            if (document.getElementById("chbx_ya").checked == true) {
-                username_pasien.disabled = false;
-            } else {
-                username_pasien.disabled = true;
-            }
         }
 
         function fungsiSalinNoTiket() {

@@ -31,10 +31,9 @@
 
     <h4>Cara penggunaan menu pada website SiPaGi : </h4>
 
-
     <div class="row">
         <div class="col-md-3">
-            <img src="<?php echo base_url('assets/assets/images/logo_konsultasi.png') ?>" style="height:41.5% ;" class="card-img-top">
+            <img src="<?php echo base_url('assets/assets/images/logo_konsultasi.png') ?>" style="height: 15rem ;" class="card-img-top">
             <div class="card" style="width: 20rem;">
                 <div class="card-body">
                     <center>
@@ -42,10 +41,10 @@
                     </center>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Jika sudah pernah menjadi pasien, <br> masukan username, lalu isi form gejala.</li>
-                    <li class="list-group-item">Jika belum pernah menjadi pasien, <br> masukan " - ", kemudian isi form data diri, lalu isi form gejala.</li>
-                    <li class="list-group-item">Selanjutnya tekan tombol <br> "Proses Data Konsultasi", maka sistem akan menampilkan hasil diagnosa Anda.</li>
-                    <li class="list-group-item">Anda dapat mengunduh langsung hasil diagnosa.</li>
+                    <li class="list-group-item">1. Jika sudah pernah menjadi pasien <br> - Masukan username <br> - Isi form gejala</li>
+                    <li class="list-group-item">2. Jika belum pernah menjadi pasien <br> - Masukan " - " <br> - Isi form data diri <br> - Isi form gejala</li>
+                    <li class="list-group-item">3. Tekan tombol "Proses Data Konsultasi", maka sistem akan menampilkan hasil diagnosa Anda.</li>
+                    <li class="list-group-item">4. Untuk mengunduh hasil diagnosa, tekan tombol "Unduh Hasil".</li>
                 </ul>
             </div>
         </div>
@@ -58,9 +57,9 @@
                     </center>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Riwayat konsultasi hanya dapat digunakan bagi Anda yang sudah pernah menjadi pasien di klinik ini.</li>
-                    <li class="list-group-item">Masukan username untuk menampilkan daftar riwayat konsultasi.</li>
-                    <li class="list-group-item">Lalu tekan tombol "Cari", maka sistem akan menampilkan seluruh daftar riwayat konsultasi Anda.</li>
+                    <li class="list-group-item">1. Riwayat konsultasi hanya dapat digunakan bagi Anda yang sudah pernah menjadi pasien di klinik ini.</li>
+                    <li class="list-group-item">2. Masukan username untuk menampilkan daftar riwayat konsultasi.</li>
+                    <li class="list-group-item">3. Tekan tombol "Cari", maka sistem akan menampilkan seluruh daftar riwayat konsultasi Anda.</li>
                 </ul>
             </div>
         </div>
@@ -73,10 +72,10 @@
                     </center>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Download hanya dapat digunakan bagi Anda yang sudah pernah melakukan konsultasi mandiri di klinik ini.</li>
-                    <li class="list-group-item">Masukan nomor tiket konsultasi untuk menampilkan hasil konsultasi.</li>
-                    <li class="list-group-item">Lalu tekan tombol "Cari", maka sistem akan menampilkan hasil konsultasi Anda.</li>
-                    <li class="list-group-item">Jika Anda ingin mencetak hasil konsultasi, klik tombol "Unduh Hasil".</li>
+                    <li class="list-group-item">1. Download hanya dapat digunakan bagi Anda yang sudah pernah melakukan konsultasi mandiri di klinik ini.</li>
+                    <li class="list-group-item">2. Masukan nomor tiket konsultasi.</li>
+                    <li class="list-group-item">3. Tekan tombol "Cari", maka sistem akan menampilkan hasil konsultasi Anda.</li>
+                    <li class="list-group-item">4. Untuk mengunduh hasil konsultasi, tekan tombol "Unduh Hasil".</li>
                 </ul>
             </div>
         </div>
@@ -89,23 +88,14 @@
                     </center>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Pilih atau cari nama dokter yang anda ingin buat janji temu.</li>
-                    <li class="list-group-item">Lalu pilih jadwal yang tersedia.</li>
-                    <li class="list-group-item">Selanjutnya isi form data diri.</li>
-                    <li class="list-group-item">Selanjutnya tekan tombol "Kirim Permintaan Janji Temu", maka sistem akan menampilkan hasil janji temu Anda.</li>
-                    <li class="list-group-item">Anda dapat mengunduh langsung hasil janji temu.</li>
+                    <li class="list-group-item">1. Pilih atau cari nama dokter yang anda ingin buat janji temu.</li>
+                    <li class="list-group-item">2. Pilih jadwal yang tersedia.</li>
+                    <li class="list-group-item">3. Isi form data diri.</li>
+                    <li class="list-group-item">4. Tekan tombol "Kirim Permintaan Janji Temu", maka sistem akan menampilkan hasil janji temu anda.</li>
+                    <li class="list-group-item">5. Untuk mengunduh hasil janji temu, tekan tombol "Unduh Hasil".</li>
                 </ul>
             </div>
         </div>
     </div>
-    <hr>
-
-
-    <center>
-        <p>Terima kasih sudah menggunakan SiPaGi.</p>
-    </center>
 </div>
-
-
-
 <?= $this->endSection() ?>

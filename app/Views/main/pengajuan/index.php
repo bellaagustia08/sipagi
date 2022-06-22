@@ -61,6 +61,11 @@
         <?php echo session()->getFlashdata('error'); ?>
     </div>
 <?php endif; ?>
+<?php if (!empty(session()->getFlashdata('error_username_konsultasi'))) : ?>
+    <div class="alert alert-danger" role="alert">
+        <?php echo session()->getFlashdata('error_username_konsultasi'); ?>
+    </div>
+<?php endif; ?>
 <?php if (!empty(session()->getFlashdata('warning'))) : ?>
     <div class="alert alert-warning" role="alert">
         <?php echo session()->getFlashdata('warning'); ?>
@@ -89,16 +94,15 @@
         <div class="row">
             <div class="col">
                 <?php
-                $username_pasien = "";
-                if (isset($_GET['username_pasien'])) {
-                    $username_pasien = $_GET['username_pasien'];
+                $username_pasien_cari = "";
+                if (isset($_GET['username_pasien_cari'])) {
+                    $username_pasien_cari = $_GET['username_pasien_cari'];
                 }
                 ?>
                 <div class="form-group">
-                    <input class="form-control" type="text" id="username_pasien" name="username_pasien" placeholder="Masukan Username Anda..." required autofocus value="<?= set_value('username_pasien') ?>">
+                    <input class="form-control" type="text" id="username_pasien_cari" name="username_pasien_cari" placeholder="Username Pasien..." required autofocus value="<?= set_value('username_pasien_cari') ?>">
                 </div>
             </div>
-
             <div class="col">
                 <button type="submit" class="btn btn-circle" id="buttonCariUsernamePasien">
                     <center><span data-feather="search"></span> Cari</center>
@@ -111,9 +115,9 @@
     <?php
     include "koneksi.php";
 
-    if (isset($_GET['username_pasien'])) {
-        $username_pasien = $_GET['username_pasien'];
-        $sql = "SELECT * FROM pasien WHERE username_pasien LIKE '$username_pasien' ";
+    if (isset($_GET['username_pasien_cari'])) {
+        $username_pasien_cari = $_GET['username_pasien_cari'];
+        $sql = "SELECT * FROM pasien WHERE username_pasien LIKE '$username_pasien_cari' ";
     } else {
         $sql = null;
     }
@@ -134,7 +138,7 @@
 
             <center>
                 <h4>Pendaftaran Pasien Baru</h4>
-            </center>
+            </center> <br>
             <h6 style="color: red;">Silahkan isi data diri di bawah ini.</h6>
 
             <!-- form konsultasi -->
@@ -180,7 +184,7 @@
                         <select name="jenis_kelamin" id="jenis_kelamin" class="selectpicker form-control" data-live-search="true" required autofocus value="<?= set_value('jenis_kelamin') ?>">
                             <option <?php if (set_value('jenis_kelamin') == '') {
                                         echo 'selected';
-                                    } ?> value="<?php echo '' ?>">Jenis Kelamin</option>
+                                    } ?> value="<?php echo '' ?>"></option>
                             <option <?php if (set_value('jenis_kelamin') == 'Perempuan') {
                                         echo 'selected';
                                     } ?> value="<?php echo 'Perempuan' ?>">Perempuan</option>
@@ -192,12 +196,12 @@
                     </div>
                     <h6>Umur</h6>
                     <div class="form-floating mb-3">
-                        <input type="number" class="form-control" name="umur" id="umur" required autofocus value="<?= set_value('umur') ?>">
+                        <input type="number" class="form-control" name="umur" id="umur" required autofocus value="<?= set_value('umur') ?>" onkeypress="return hanyaAngka(event)">
                         <label>Masukan Umur &nbsp;<b style="color: red; font-size:large;">*</b></label>
                     </div>
                     <br>
                 </div>
-                <br>
+                <br><br>
 
                 <h6 style="color: red;">Silahkan isi form gejala.</h6>
                 <div class="card align-self-center" id="cardKonsultasi">
@@ -207,6 +211,13 @@
                     <br>
 
                     <table id="table-datatable" class="table table-hover row-border">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Gejala yang Dialami</th>
+                                <th>Pilih Tingkat Keyakinan</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             <?php
                             $nomor = 0;
@@ -215,12 +226,12 @@
                             ?>
                                 <tr>
                                     <td style="width:5%" align="center"><?php echo $nomor ?></td>
-                                    <td style="width: 65%; word-wrap: break-word;">
+                                    <td style="width: 55%; word-wrap: break-word;">
                                         <?php
                                         echo $row->nama_gejala;
                                         ?>
                                     </td>
-                                    <td style="width: 30%;" align="center">
+                                    <td style="width: 40%;" align="center">
                                         <div class="form-group">
                                             <select name="cf_user[]" id="cf_user" class="form-select" required value="<?= set_select('cf_user[]') ?>">
                                                 <option value="0">Pilih Tingkat Keyakinan</option>
@@ -263,44 +274,43 @@
                             if ($data['username_pasien'] == $rowpasien->username_pasien) {
                         ?>
                                 <tr>
-                                    <td style="width: 9%;">Nama</td>
-                                    <td style="width: 2%;">:</td>
+                                    <td style="width: 8%;">Nama</td>
+                                    <td style="width: 4%;" align="center">:</td>
                                     <td>
                                         <?php echo $rowpasien->nama_pasien; ?>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Username</td>
-                                    <td>:</td>
+                                    <td style="width: 8%;">Username</td>
+                                    <td style="width: 4%;" align="center">:</td>
                                     <td><?php echo $rowpasien->username_pasien ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Alamat</td>
-                                    <td>:</td>
+                                    <td style="width: 8%;">Alamat</td>
+                                    <td style="width: 4%;" align="center">:</td>
                                     <td><?php echo $rowpasien->alamat_pasien ?></td>
                                 </tr>
                                 <tr>
-                                    <td>No. Telepon</td>
-                                    <td>:</td>
+                                    <td style="width: 8%;">No. Telepon</td>
+                                    <td style="width: 4%;" align="center">:</td>
                                     <td><?php echo $rowpasien->no_telp_pasien ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Jenis Kelamin</td>
-                                    <td>:</td>
+                                    <td style="width: 8%;">Jenis Kelamin</td>
+                                    <td style="width: 4%;" align="center">:</td>
                                     <td><?php echo $rowpasien->jenis_kelamin_pasien ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Tanggal Lahir</td>
-                                    <td>:</td>
+                                    <td style="width: 8%;">Tanggal Lahir</td>
+                                    <td style="width: 4%;" align="center">:</td>
                                     <td><?php echo tgl_indo($rowpasien->tanggal_lahir_pasien) ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Umur</td>
-                                    <td>:</td>
+                                    <td style="width: 8%;">Umur</td>
+                                    <td style="width: 4%;" align="center">:</td>
                                     <td><?php echo $rowpasien->umur_pasien ?></td>
                                 </tr>
                         <?php
-
                             }
                         }
                         ?>
@@ -308,6 +318,7 @@
                     </tbody>
                 </table>
             </div>
+            <br>
 
 
             <h6 style="color: red;">Silahkan isi form gejala.</h6>
@@ -356,12 +367,12 @@
                             ?>
                                 <tr>
                                     <td style="width:5%" align="center"><?php echo $nomor ?></td>
-                                    <td style="width: 65%; word-wrap: break-word;">
+                                    <td style="width: 55%; word-wrap: break-word;">
                                         <?php
                                         echo $row->nama_gejala;
                                         ?>
                                     </td>
-                                    <td style="width: 30%;" align="center">
+                                    <td style="width: 40%;" align="center">
                                         <div class="form-group">
                                             <select name="cf_user[]" id="cf_user" class="form-select" required value="<?= set_select('cf_user') ?>">
                                                 <option value="0">Pilih Tingkat Keyakinan</option>
@@ -378,7 +389,6 @@
                             <?php } ?>
                         </tbody>
                     </table>
-
 
                     <br>
                     <div class="form-group">

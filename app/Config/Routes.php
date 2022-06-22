@@ -104,7 +104,7 @@ $routes->post('/jadwal/processTambah', 'JadwalController::processTambah');
 $routes->post('/jadwal/processEdit', 'JadwalController::processEdit');
 $routes->post('/jadwal/delete', 'JadwalController::delete');
 
-//bagian Konsultasi
+//bagian Konsultasi tidak terpakai
 $routes->get('/konsultasi', 'KonsultasiController::index');
 $routes->post('/konsultasi/processTambah', 'KonsultasiController::processTambah');
 $routes->post('/konsultasi/processEdit', 'KonsultasiController::processEdit');

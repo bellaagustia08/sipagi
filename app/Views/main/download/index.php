@@ -82,10 +82,9 @@
                 }
                 ?>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="no_tiket" placeholder="Masukan Nomor Tiket Konsultasi..." required autofocus value="<?php echo $no_tiket; ?>">
+                    <input class="form-control" type="text" name="no_tiket" placeholder="No.Tiket Konsultasi..." required autofocus value="<?php echo $no_tiket; ?>">
                 </div>
             </div>
-
             <div class="col">
                 <button type="submit" class="btn btn-circle" id="buttonCariTiket">
                     <center><span data-feather="search"></span> Cari</center>
@@ -142,42 +141,40 @@
                             if ($data['id_pasien'] == $rowpasien->id_pasien) {
                         ?>
                                 <tr>
-                                    <td style="width: 9%;">Nama</td>
-                                    <td style="width: 2%;">:</td>
+                                    <td style="width: 8%;">Nama</td>
+                                    <td style="width: 4%;" align="center">:</td>
                                     <td>
-                                        <?php
-                                        echo $rowpasien->nama_pasien;
-                                        ?>
+                                        <?php echo $rowpasien->nama_pasien; ?>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Username</td>
-                                    <td>:</td>
+                                    <td style="width: 8%;">Username</td>
+                                    <td style="width: 4%;" align="center">:</td>
                                     <td><?php echo $rowpasien->username_pasien ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Alamat</td>
-                                    <td>:</td>
+                                    <td style="width: 8%;">Alamat</td>
+                                    <td style="width: 4%;" align="center">:</td>
                                     <td><?php echo $rowpasien->alamat_pasien ?></td>
                                 </tr>
                                 <tr>
-                                    <td>No. Telepon</td>
-                                    <td>:</td>
+                                    <td style="width: 8%;">No. Telepon</td>
+                                    <td style="width: 4%;" align="center">:</td>
                                     <td><?php echo $rowpasien->no_telp_pasien ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Jenis Kelamin</td>
-                                    <td>:</td>
+                                    <td style="width: 8%;">Jenis Kelamin</td>
+                                    <td style="width: 4%;" align="center">:</td>
                                     <td><?php echo $rowpasien->jenis_kelamin_pasien ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Tanggal Lahir</td>
-                                    <td>:</td>
+                                    <td style="width: 8%;">Tanggal Lahir</td>
+                                    <td style="width: 4%;" align="center">:</td>
                                     <td><?php echo tgl_indo($rowpasien->tanggal_lahir_pasien) ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Umur</td>
-                                    <td>:</td>
+                                    <td style="width: 8%;">Umur</td>
+                                    <td style="width: 4%;" align="center">:</td>
                                     <td><?php echo $rowpasien->umur_pasien ?></td>
                                 </tr>
                         <?php

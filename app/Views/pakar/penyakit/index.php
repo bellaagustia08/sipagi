@@ -32,9 +32,9 @@
 </button>
 
 <!-- button refresh -->
-<a style="float: right;" class="nav-link" href="<?= base_url(); ?>/penyakit">
+<!-- <a style="float: right;" class="nav-link" href="<?= base_url(); ?>/penyakit">
     <span data-feather="refresh-ccw"></span> Muat Ulang
-</a>
+</a> -->
 <br><br>
 
 
@@ -58,9 +58,9 @@
                 <td style="width:30%;"><?php echo $row->nama_penyakit ?></td>
                 <td style="width: 50%;" align="center"><img src="<?php echo $row->gambar_penyakit ?>" alt="" id="imageTampilGambar" style="width:180px"></td>
                 <td style="width: 15%;" align="center">
-                    <a class="btn btn-sm btn-circle btn-simpan btn-detail-penyakit" data-id_penyakit="<?= $row->id_penyakit; ?>" data-nama_penyakit="<?= $row->nama_penyakit; ?>" data-definisi_penyakit="<?= $row->definisi_penyakit; ?>" data-penanganan_penyakit="<?= $row->penanganan_penyakit; ?>">Detail</a>
-                    <a class="btn btn-primary btn-sm btn-edit-penyakit" data-id_penyakit="<?= $row->id_penyakit; ?>" data-gambar_penyakit="<?= $row->gambar_penyakit; ?>" data-nama_penyakit="<?= $row->nama_penyakit; ?>" data-definisi_penyakit="<?= $row->definisi_penyakit; ?>" data-penanganan_penyakit="<?= $row->penanganan_penyakit; ?>">Ubah</a>
-                    <a class="btn btn-danger btn-sm btn-delete-penyakit" data-id_penyakit="<?= $row->id_penyakit; ?>">Hapus</a>
+                    <a style="width: 60px ;" class="btn btn-sm btn-circle btn-simpan btn-detail-penyakit" data-id_penyakit="<?= $row->id_penyakit; ?>" data-nama_penyakit="<?= $row->nama_penyakit; ?>" data-definisi_penyakit="<?= $row->definisi_penyakit; ?>" data-penanganan_penyakit="<?= $row->penanganan_penyakit; ?>">Detail</a>
+                    <a style="width: 60px ;" class="btn btn-primary btn-sm btn-edit-penyakit" data-id_penyakit="<?= $row->id_penyakit; ?>" data-gambar_penyakit="<?= $row->gambar_penyakit; ?>" data-nama_penyakit="<?= $row->nama_penyakit; ?>" data-definisi_penyakit="<?= $row->definisi_penyakit; ?>" data-penanganan_penyakit="<?= $row->penanganan_penyakit; ?>">Ubah</a>
+                    <a style="width: 60px ;" class="btn btn-danger btn-sm btn-delete-penyakit" data-id_penyakit="<?= $row->id_penyakit; ?>">Hapus</a>
                 </td>
             </tr>
         <?php } ?>

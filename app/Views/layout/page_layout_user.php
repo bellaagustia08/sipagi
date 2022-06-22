@@ -29,6 +29,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.12.1/i18n/id.json"></script>
 
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -288,6 +289,9 @@
                 responsive: true,
                 stateSave: true,
                 pageLength: 50,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.12.1/i18n/id.json"
+                }
             });
 
 

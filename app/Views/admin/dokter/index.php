@@ -31,10 +31,10 @@
 <button id="buttonTambah" type="button" class="btn btn-circle mb-2" data-bs-toggle="modal" data-bs-target="#tambahModal">
     <span data-feather="plus-circle"></span> Tambah Dokter
 </button>
-<a style="float: right;" class="nav-link" href="<?= base_url(); ?>/dokter">
-    <span data-feather="refresh-ccw"></span> Muat Ulang
-</a>
 
+<!-- <a style="float: right;" class="nav-link" href="<?= base_url(); ?>/dokter">
+    <span data-feather="refresh-ccw"></span> Muat Ulang
+</a> -->
 <br><br>
 
 <table id="table-datatables" class="table table-hover row-border">
@@ -59,8 +59,8 @@
                 <td style="width:30%; word-wrap: break-word;"><?php echo $row['alamat_dokter'] ?></td>
                 <td style="width:20%;" align="center"><?php echo $row['no_telp_dokter'] ?></td>
                 <td style="width: 20%;" align="center">
-                    <a class="btn btn-primary btn-sm btn-edit-dokter" data-id_dokter="<?= $row['id_dokter']; ?>" data-nama_dokter="<?= $row['nama_dokter']; ?>" data-alamat_dokter="<?= $row['alamat_dokter']; ?>" data-no_telp_dokter="<?= $row['no_telp_dokter']; ?>">Ubah</a>
-                    <a class="btn btn-danger btn-sm btn-delete-dokter" data-id_dokter="<?= $row['id_dokter']; ?>">Hapus</a>
+                    <a style="width: 60px ;" class="btn btn-primary btn-sm btn-edit-dokter" data-id_dokter="<?= $row['id_dokter']; ?>" data-nama_dokter="<?= $row['nama_dokter']; ?>" data-alamat_dokter="<?= $row['alamat_dokter']; ?>" data-no_telp_dokter="<?= $row['no_telp_dokter']; ?>">Ubah</a>
+                    <a style="width: 60px ;" class="btn btn-danger btn-sm btn-delete-dokter" data-id_dokter="<?= $row['id_dokter']; ?>">Hapus</a>
                 </td>
             </tr>
         <?php } ?>

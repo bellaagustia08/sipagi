@@ -31,10 +31,9 @@
     <span data-feather="plus-circle"></span> Tambah Jadwal
 </button>
 
-<a style="float: right;" class="nav-link" href="<?= base_url(); ?>/jadwal">
+<!-- <a style="float: right;" class="nav-link" href="<?= base_url(); ?>/jadwal">
     <span data-feather="refresh-ccw"></span> Muat Ulang
-</a>
-
+</a> -->
 <br><br>
 
 <table id="table-datatables" class="table table-hover row-border">
@@ -91,8 +90,8 @@
                     <?php if ($row['status'] == "Aktif") { ?>
                         <a class="btn btn-danger btn-sm btn-delete-jadwal" data-id_jadwal="<?= $row['id_jadwal']; ?>">Hapus</a>
                     <?php } else { ?>
-                        <a class="btn btn-primary btn-sm btn-edit-jadwal" data-id_jadwal="<?= $row['id_jadwal']; ?>" data-tanggal_jadwal="<?= $row['tanggal_jadwal']; ?>" data-waktu_jadwal="<?= $row['waktu_jadwal']; ?>" data-id_dokter="<?= $row['id_dokter']; ?>">Ubah</a>
-                        <a class="btn btn-danger btn-sm btn-delete-jadwal" data-id_jadwal="<?= $row['id_jadwal']; ?>">Hapus</a>
+                        <a style="width: 60px ;" class="btn btn-primary btn-sm btn-edit-jadwal" data-id_jadwal="<?= $row['id_jadwal']; ?>" data-tanggal_jadwal="<?= $row['tanggal_jadwal']; ?>" data-waktu_jadwal="<?= $row['waktu_jadwal']; ?>" data-id_dokter="<?= $row['id_dokter']; ?>">Ubah</a>
+                        <a style="width: 60px ;" class="btn btn-danger btn-sm btn-delete-jadwal" data-id_jadwal="<?= $row['id_jadwal']; ?>">Hapus</a>
                     <?php } ?>
                 </td>
             </tr>

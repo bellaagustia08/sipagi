@@ -67,7 +67,7 @@ class UserController extends BaseController
     public function delete()
     {
         $id = $this->request->getPost('id_user');
-        $this->user->delete($id);
+        $this->users->delete($id);
 
         session()->setFlashdata('deleted', 'Data Berhasil di hapus');
         return redirect()->to('/user');

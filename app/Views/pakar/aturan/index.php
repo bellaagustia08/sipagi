@@ -32,10 +32,9 @@
 </button>
 
 <!-- button refresh -->
-<a style="float: right;" class="nav-link" href="<?= base_url(); ?>/aturan">
+<!-- <a style="float: right;" class="nav-link" href="<?= base_url(); ?>/aturan">
     <span data-feather="refresh-ccw"></span> Muat Ulang
-</a>
-
+</a> -->
 <br><br>
 
 <table id="table-datatables" class="table table-hover row-border">
@@ -76,8 +75,8 @@
                 </td>
                 <td style="width: 10%;" align="center"><?php echo $row->cf_pakar ?></td>
                 <td style="width: 15%;" align="center">
-                    <a class="btn btn-primary btn-sm btn-edit-aturan" data-id_aturan="<?= $row->id_aturan; ?>" data-id_gejala="<?= $row->id_gejala; ?>" data-id_penyakit="<?= $row->id_penyakit; ?>" data-cf_pakar="<?= $row->cf_pakar; ?>">Ubah</a>
-                    <a class="btn btn-danger btn-sm btn-delete-aturan" data-id_aturan="<?= $row->id_aturan; ?>">Hapus</a>
+                    <a style="width: 60px ;" class="btn btn-primary btn-sm btn-edit-aturan" data-id_aturan="<?= $row->id_aturan; ?>" data-id_gejala="<?= $row->id_gejala; ?>" data-id_penyakit="<?= $row->id_penyakit; ?>" data-cf_pakar="<?= $row->cf_pakar; ?>">Ubah</a>
+                    <a style="width: 60px ;" class="btn btn-danger btn-sm btn-delete-aturan" data-id_aturan="<?= $row->id_aturan; ?>">Hapus</a>
                 </td>
             </tr>
         <?php } ?>

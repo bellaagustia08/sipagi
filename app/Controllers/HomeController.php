@@ -98,7 +98,7 @@ class HomeController extends BaseController
                 $this->pasien->insertPasien($data);
                 $id_pasien_konsultasi = $this->pasien->insertId();
             } else {
-                session()->setFlashdata('error', 'Username sudah digunakan, gunakan username lain!');
+                session()->setFlashdata('error_username_konsultasi', 'Username sudah digunakan, gunakan username lain!');
                 return redirect()->back()->withInput();
             }
         } else {

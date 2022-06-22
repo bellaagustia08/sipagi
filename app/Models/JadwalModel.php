@@ -9,7 +9,7 @@ class JadwalModel extends Model
     protected $table = "jadwal";
     protected $primaryKey = "id_jadwal";
     protected $returnType = "object";
-    protected $allowedFields = ['id_jadwal', 'tanggal_jadwal', 'waktu_jadwal', 'id_dokter', 'id_konsultasi', 'status'];
+    protected $allowedFields = ['id_jadwal', 'tanggal_jadwal', 'waktu_jadwal', 'id_dokter', 'id_pasien', 'status'];
 
     public function getAll()
     {
@@ -34,27 +34,5 @@ class JadwalModel extends Model
     {
         $this->db->table($this->table)->where('id_jadwal', $id);
         return $this->db->table($this->table)->delete($id);
-    }
-
-    //belum kepake
-    public function getAllJoinSesi()
-    {
-        return $this->db->table($this->table)
-            ->join('sesi', 'jadwal.id_sesi=sesi.id_sesi')
-            ->get()->getResultArray();
-    }
-
-    public function getAllJoinKonsultasi()
-    {
-        return $this->db->table($this->table)
-            ->join('konsultasi', 'jadwal.id_konsultasi=konsultasi.id_konsultasi')
-            ->get()->getResultArray();
-    }
-
-    public function getAllJoinDokter()
-    {
-        return $this->db->table($this->table)
-            ->join('dokter', 'jadwal.id_dokter=dokter.id_dokter')
-            ->get()->getResultArray();
     }
 }

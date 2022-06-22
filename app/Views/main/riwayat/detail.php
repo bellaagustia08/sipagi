@@ -60,7 +60,7 @@
         ?>
                 <img src="<?php echo $rowpenyakit->gambar_penyakit ?>" alt="" id="imageHasilGambar" style="width:250px">
                 <br>
-                
+
                 <h6>Anda menderita penyakit <?php echo $rowpenyakit->nama_penyakit ?> dengan hasil hipotesis <?php echo round($konsultasi->cf_gabungan * 100, 2) ?>%</h6>
                 <p style="font-size: 15px;"><?php echo $rowpenyakit->definisi_penyakit ?></p>
                 <br>

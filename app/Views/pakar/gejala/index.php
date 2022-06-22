@@ -32,10 +32,9 @@
 </button>
 
 <!-- button refresh -->
-<a style="float: right;" class="nav-link" href="<?= base_url(); ?>/gejala">
+<!-- <a style="float: right;" class="nav-link" href="<?= base_url(); ?>/gejala">
     <span data-feather="refresh-ccw"></span> Muat Ulang
-</a>
-
+</a> -->
 <br><br>
 
 <table id="table-datatables" class="table table-hover row-border">
@@ -58,8 +57,8 @@
                 <td style="width:10%;" align="center"><?php echo $row->kode_gejala ?></td>
                 <td style="width:65%; word-wrap:unset;"><?php echo $row->nama_gejala ?></td>
                 <td style="width: 20%;" align="center">
-                    <a class="btn btn-primary btn-sm btn-edit-gejala" data-id_gejala="<?= $row->id_gejala; ?>" data-nama_gejala="<?= $row->nama_gejala; ?>">Ubah</a>
-                    <a class="btn btn-danger btn-sm btn-delete-gejala" data-id_gejala="<?= $row->id_gejala; ?>">Hapus</a>
+                    <a style="width: 60px ;" class="btn btn-primary btn-sm btn-edit-gejala" data-id_gejala="<?= $row->id_gejala; ?>" data-nama_gejala="<?= $row->nama_gejala; ?>">Ubah</a>
+                    <a style="width: 60px ;" class="btn btn-danger btn-sm btn-delete-gejala" data-id_gejala="<?= $row->id_gejala; ?>">Hapus</a>
                 </td>
             </tr>
         <?php } ?>

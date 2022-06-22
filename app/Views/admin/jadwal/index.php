@@ -88,7 +88,8 @@
                 <td style="width:16%;" align="center"><?php echo $row['status'] ?></td>
                 <td style="width: 15%;" align="center">
                     <?php if ($row['status'] == "Aktif") { ?>
-                        <a class="btn btn-danger btn-sm btn-delete-jadwal" data-id_jadwal="<?= $row['id_jadwal']; ?>">Hapus</a>
+                        <a style="width: 60px ;" class="btn btn-primary btn-sm btn-edit-jadwal disabled" data-id_jadwal="<?= $row['id_jadwal']; ?>" data-tanggal_jadwal="<?= $row['tanggal_jadwal']; ?>" data-waktu_jadwal="<?= $row['waktu_jadwal']; ?>" data-id_dokter="<?= $row['id_dokter']; ?>">Ubah</a>
+                        <a style="width: 60px ;" class="btn btn-danger btn-sm btn-delete-jadwal" data-id_jadwal="<?= $row['id_jadwal']; ?>">Hapus</a>
                     <?php } else { ?>
                         <a style="width: 60px ;" class="btn btn-primary btn-sm btn-edit-jadwal" data-id_jadwal="<?= $row['id_jadwal']; ?>" data-tanggal_jadwal="<?= $row['tanggal_jadwal']; ?>" data-waktu_jadwal="<?= $row['waktu_jadwal']; ?>" data-id_dokter="<?= $row['id_dokter']; ?>">Ubah</a>
                         <a style="width: 60px ;" class="btn btn-danger btn-sm btn-delete-jadwal" data-id_jadwal="<?= $row['id_jadwal']; ?>">Hapus</a>

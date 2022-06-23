@@ -21,8 +21,13 @@
     <div class="card" id="cardDetailRiwayat">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
             <h4>Detail Riwayat</h4>
-            <input type="text" value="<?php echo $konsultasi->no_tiket; ?>" id="copyText" readonly hidden>
-            <button align="right" id="copyBtn" onclick="fungsiSalinNoTiket()"><span data-feather="copy"></span> No. Tiket : <?php echo $konsultasi->no_tiket; ?></button>
+            <div class="row">
+                <div class="col float-end">
+                    <b>No. Tiket Konsultasi :</b>
+                    <input id="copyText" type="text" value="<?php echo $konsultasi->no_tiket; ?>" readonly style="width:100px; text-align:center;">
+                    <button id="copyBtn" onclick="fungsiSalinNoTiket()"><span data-feather="copy"></span> Salin </button>
+                </div>
+            </div>
         </div>
         <br>
 

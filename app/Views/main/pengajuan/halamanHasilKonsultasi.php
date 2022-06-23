@@ -79,7 +79,7 @@
         </div>
         <br>
 
-        <a class="nav-item nav-link" href="<?= base_url(); ?>/download/cetakHasilDownload/<?php echo $_SESSION['no_tiket']; ?>" id="buttonCetakHasilKonsultasi">
+        <a class="nav-item nav-link" href="<?= base_url(); ?>/pengajuan/hasilKonsultasi/cetakHasil" id="buttonCetakHasilKonsultasi">
             <span data-feather="printer"></span> Unduh Hasil
         </a>
         <br><br><br>
@@ -122,29 +122,17 @@
                     <tr>
                         <td>Jenis Kelamin</td>
                         <td>:</td>
-                        <td>
-                            <?php
-                            echo $pasien->jenis_kelamin_pasien;
-                            ?>
-                        </td>
+                        <td> <?php echo $pasien->jenis_kelamin_pasien; ?> </td>
                     </tr>
                     <tr>
                         <td>Tanggal Lahir</td>
                         <td>:</td>
-                        <td>
-                            <?php
-                            echo tgl_indo($pasien->tanggal_lahir_pasien);
-                            ?>
-                        </td>
+                        <td> <?php echo $pasien->tanggal_lahir_pasien; ?> </td>
                     </tr>
                     <tr>
                         <td>Umur</td>
                         <td>:</td>
-                        <td>
-                            <?php
-                            echo $pasien->umur_pasien;
-                            ?>
-                        </td>
+                        <td> <?php echo $pasien->umur_pasien; ?> </td>
                     </tr>
                 </tbody>
             </table>

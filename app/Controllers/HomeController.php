@@ -289,16 +289,17 @@ class HomeController extends BaseController
         } else {
             $no_tiket = session()->get('no_tiket');
             $data['konsultasi'] = $this->konsultasi->getByNomorTiket($no_tiket);
-            $data['penyakit'] = $this->penyakit->findAll();
-            $data['pasien'] = $this->pasien->findAll();
+            $id_penyakit = $data['konsultasi'][0]['id_penyakit'];
+            $id_pasien = $data['konsultasi'][0]['id_pasien'];
 
-            session()->destroy();
+            $data['penyakitAll'] = $this->penyakit->findAll();
+            $data['penyakit'] = $this->penyakit->where('id_penyakit', $id_penyakit)->first();
+            $data['pasien'] = $this->pasien->where('id_pasien', $id_pasien)->first();
+
+            // session()->destroy();
             return view('main/pengajuan/cetakHasilPengajuan', $data);
         }
     }
-
-
-
 
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -344,17 +345,16 @@ class HomeController extends BaseController
     public function cetakHasilDownload($no_tiket)
     {
         $temp_konsultasi = $this->konsultasi->where('no_tiket', $no_tiket)->first();
+        $temp_pasien = $this->pasien->where('id_pasien', $temp_konsultasi->id_pasien)->first();
 
         $data['konsultasi'] = $temp_konsultasi;
-        $data['penyakit'] = $this->penyakit->findAll();
+        $data['penyakit'] = $this->penyakit->where('id_penyakit', $temp_konsultasi->id_penyakit)->first();
         $data['gejala'] = $this->gejala->findAll();
-        $data['pasien'] = $this->pasien->findAll();
+        $data['pasien'] = $temp_pasien;
 
         session()->destroy();
         return view('main/download/cetakDownload', $data);
     }
-
-
 
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -368,7 +368,6 @@ class HomeController extends BaseController
         $data['jadwal'] = $this->jadwal->findAll();
 
         return view('main/janjitemu/index', $data);
-        // }
     }
 
     public function processjanjitemu()

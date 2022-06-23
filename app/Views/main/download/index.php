@@ -141,41 +141,39 @@
                             if ($data['id_pasien'] == $rowpasien->id_pasien) {
                         ?>
                                 <tr>
-                                    <td style="width: 8%;">Nama</td>
-                                    <td style="width: 4%;" align="center">:</td>
-                                    <td>
-                                        <?php echo $rowpasien->nama_pasien; ?>
-                                    </td>
+                                    <td style="width: 145px;">Username Pasien</td>
+                                    <td style="width: 25px;">:</td>
+                                    <td> <?php echo $rowpasien->username_pasien;; ?> </td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 8%;">Username</td>
-                                    <td style="width: 4%;" align="center">:</td>
-                                    <td><?php echo $rowpasien->username_pasien ?></td>
+                                    <td>Nama</td>
+                                    <td>:</td>
+                                    <td> <?php echo $rowpasien->nama_pasien; ?> </td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 8%;">Alamat</td>
-                                    <td style="width: 4%;" align="center">:</td>
-                                    <td><?php echo $rowpasien->alamat_pasien ?></td>
+                                    <td>Alamat</td>
+                                    <td>:</td>
+                                    <td> <?php echo $rowpasien->alamat_pasien; ?> </td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 8%;">No. Telepon</td>
-                                    <td style="width: 4%;" align="center">:</td>
-                                    <td><?php echo $rowpasien->no_telp_pasien ?></td>
+                                    <td>No. Telepon</td>
+                                    <td>:</td>
+                                    <td> <?php echo $rowpasien->no_telp_pasien; ?> </td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 8%;">Jenis Kelamin</td>
-                                    <td style="width: 4%;" align="center">:</td>
-                                    <td><?php echo $rowpasien->jenis_kelamin_pasien ?></td>
+                                    <td>Jenis Kelamin</td>
+                                    <td>:</td>
+                                    <td> <?php echo $rowpasien->jenis_kelamin_pasien; ?> </td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 8%;">Tanggal Lahir</td>
-                                    <td style="width: 4%;" align="center">:</td>
-                                    <td><?php echo tgl_indo($rowpasien->tanggal_lahir_pasien) ?></td>
+                                    <td>Tanggal Lahir</td>
+                                    <td>:</td>
+                                    <td> <?php echo $rowpasien->tanggal_lahir_pasien; ?> </td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 8%;">Umur</td>
-                                    <td style="width: 4%;" align="center">:</td>
-                                    <td><?php echo $rowpasien->umur_pasien ?></td>
+                                    <td>Umur</td>
+                                    <td>:</td>
+                                    <td> <?php echo $rowpasien->umur_pasien; ?> </td>
                                 </tr>
                         <?php
                             }

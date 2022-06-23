@@ -50,86 +50,51 @@
     <div class="card" id="cardHasilKonsultasi_datapasien">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
             <h4>Data Diri Pasien</h4>
+            <div class="row">
+                <div class="col float-end">
+                    <h6>No. Tiket Konsultasi : <?php echo $konsultasi->no_tiket; ?></h6>
+                </div>
+            </div>
         </div>
         <br>
-        <?php
 
-        ?>
-        <h6>No. Tiket Konsultasi : <?php echo $konsultasi->no_tiket; ?></h6>
         <table>
             <tbody>
-                <?php
-                foreach ($pasien as $rowpasien) {
-                    if ($konsultasi->id_pasien == $rowpasien->id_pasien) {
-                ?>
-                        <tr>
-                            <td style="width: 16%;">Nama</td>
-                            <td style="width: 3%;">:</td>
-                            <td>
-                                <?php
-                                echo $rowpasien->nama_pasien;
-                                ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Username</td>
-                            <td>:</td>
-                            <td>
-                                <?php
-                                echo $rowpasien->username_pasien;
-                                ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Alamat</td>
-                            <td>:</td>
-                            <td>
-                                <?php
-                                echo $rowpasien->alamat_pasien;
-                                ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>No. Telepon</td>
-                            <td>:</td>
-                            <td>
-                                <?php
-                                echo $rowpasien->no_telp_pasien;
-                                ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Jenis Kelamin</td>
-                            <td>:</td>
-                            <td>
-                                <?php
-                                echo $rowpasien->jenis_kelamin_pasien;
-                                ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Tanggal Lahir</td>
-                            <td>:</td>
-                            <td>
-                                <?php
-                                echo tgl_indo($rowpasien->tanggal_lahir_pasien);
-                                ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Umur</td>
-                            <td>:</td>
-                            <td>
-                                <?php
-                                echo $rowpasien->umur_pasien;
-                                ?>
-                            </td>
-                        </tr>
-                <?php
-                    }
-                }
-                ?>
-
+                <tr>
+                    <td style="width: 150px;">Username Pasien</td>
+                    <td style="width: 25px;">:</td>
+                    <td> <?php echo $pasien->username_pasien;; ?> </td>
+                </tr>
+                <tr>
+                    <td>Nama</td>
+                    <td>:</td>
+                    <td> <?php echo $pasien->nama_pasien; ?> </td>
+                </tr>
+                <tr>
+                    <td>Alamat</td>
+                    <td>:</td>
+                    <td> <?php echo $pasien->alamat_pasien; ?> </td>
+                </tr>
+                <tr>
+                    <td>No. Telepon</td>
+                    <td>:</td>
+                    <td> <?php echo $pasien->no_telp_pasien; ?> </td>
+                </tr>
+                <tr>
+                    <td>Jenis Kelamin</td>
+                    <td>:</td>
+                    <td> <?php echo $pasien->jenis_kelamin_pasien; ?> </td>
+                </tr>
+                <tr>
+                    <td>Tanggal Lahir</td>
+                    <td>:</td>
+                    <td> <?php echo $pasien->tanggal_lahir_pasien; ?> </td>
+                </tr>
+                <tr>
+                    <td>Umur</td>
+                    <td>:</td>
+                    <td> <?php echo $pasien->umur_pasien; ?> </td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -145,15 +110,20 @@
         while ($data_gejalayangdialami = mysqli_fetch_array($hasil_gejalayangdialami)) {
             foreach ($gejala as $rowgejala) {
                 if ($data_gejalayangdialami['id_gejala'] == $rowgejala->id_gejala && $data_gejalayangdialami['cf_user'] == 0.2) {
-                    echo $rowgejala->nama_gejala . ' [ Tingkat Keyakinan : Tidak Tahu ]'; echo '<br>';
+                    echo $rowgejala->nama_gejala . ' [ Tingkat Keyakinan : Tidak Tahu ]';
+                    echo '<br>';
                 } else if ($data_gejalayangdialami['id_gejala'] == $rowgejala->id_gejala && $data_gejalayangdialami['cf_user'] == 0.4) {
-                    echo $rowgejala->nama_gejala . ' [ Tingkat Keyakinan : Sedikit Yakin ]'; echo '<br>';
+                    echo $rowgejala->nama_gejala . ' [ Tingkat Keyakinan : Sedikit Yakin ]';
+                    echo '<br>';
                 } else if ($data_gejalayangdialami['id_gejala'] == $rowgejala->id_gejala && $data_gejalayangdialami['cf_user'] == 0.6) {
-                    echo $rowgejala->nama_gejala . ' [ Tingkat Keyakinan : Cukup Yakin ]'; echo '<br>';
+                    echo $rowgejala->nama_gejala . ' [ Tingkat Keyakinan : Cukup Yakin ]';
+                    echo '<br>';
                 } else if ($data_gejalayangdialami['id_gejala'] == $rowgejala->id_gejala && $data_gejalayangdialami['cf_user'] == 0.8) {
-                    echo $rowgejala->nama_gejala . ' [ Tingkat Keyakinan : Yakin ]'; echo '<br>';
+                    echo $rowgejala->nama_gejala . ' [ Tingkat Keyakinan : Yakin ]';
+                    echo '<br>';
                 } else if ($data_gejalayangdialami['id_gejala'] == $rowgejala->id_gejala && $data_gejalayangdialami['cf_user'] == 0.1) {
-                    echo $rowgejala->nama_gejala . ' [ Tingkat Keyakinan : Sangat Yakin ]'; echo '<br>';
+                    echo $rowgejala->nama_gejala . ' [ Tingkat Keyakinan : Sangat Yakin ]';
+                    echo '<br>';
                 }
             }
         }
@@ -164,22 +134,13 @@
             <h4>Hasil Diagnosa</h4>
         </div>
         <br>
-        <?php
-        foreach ($penyakit as $rowpenyakit) {
-            if ($konsultasi->id_penyakit == $rowpenyakit->id_penyakit) {
-        ?>
-                <h6>Anda menderita penyakit <?php echo $rowpenyakit->nama_penyakit ?> dengan hasil hipotesis <?php echo round($konsultasi->cf_gabungan * 100, 2) ?>%</h6>
-                <p style="font-size: 15px;"><?php echo $rowpenyakit->definisi_penyakit ?></p>
-                <br>
+        <h6>Anda menderita penyakit <?php echo $penyakit->nama_penyakit ?> dengan hasil hipotesis <?php echo round($konsultasi->cf_gabungan * 100, 2) ?>%</h6>
+        <p style="font-size: 15px;"><?php echo $penyakit->definisi_penyakit ?></p>
+        <br>
 
-                <h6>Saran Penanganan : </h6>
-                <p style="font-size: 15px;"><?php echo $rowpenyakit->penanganan_penyakit ?></p>
-                <br>
-                <br>
-        <?php
-            }
-        }
-        ?>
+        <h6>Saran Penanganan : </h6>
+        <p style="font-size: 15px;"><?php echo $penyakit->penanganan_penyakit ?></p>
+        <br><br>
     </div>
 
 </div>

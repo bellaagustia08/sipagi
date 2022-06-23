@@ -11,43 +11,34 @@
 <?= $this->section('content') ?>
 
 <?php if (!empty(session()->getFlashdata('error'))) : ?>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div class="alert alert-danger" role="alert">
         <?php echo session()->getFlashdata('error'); ?>
     </div>
 <?php endif; ?>
-
 <?php if (!empty(session()->getFlashdata('success'))) : ?>
     <div class="alert alert-success" role="alert">
         <?php echo session()->getFlashdata('success'); ?>
     </div>
 <?php endif; ?>
-
-<br>
+<?php if (!empty(session()->getFlashdata('error_email'))) : ?>
+    <div class="alert alert-danger" role="alert">
+        <?php echo session()->getFlashdata('error_email'); ?>
+    </div>
+<?php endif; ?>
 
 <center>
-
-    <?php if (!empty(session()->getFlashdata('error_email'))) : ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <?php echo session()->getFlashdata('error_email'); ?>
-        </div>
-    <?php endif; ?>
-
     <div class="card" id="cardProfil">
-        <br>
-        <center><img src="<?php echo base_url('assets/assets/images/avatar.png') ?>" alt="Avatar" style="width:25%"></center>
-        <br>
         <div class="container">
+            <br>
+            <img src="<?php echo base_url('assets/assets/images/avatar.png') ?>" alt="Avatar" style="width:25%">
+            <br>
             <?php
-
             $tempIdUser = $_SESSION['id_user'];
             $tempNama = $_SESSION['nama_lengkap'];
             $tempUsername = $_SESSION['username'];
             $tempEmail = $_SESSION['email'];
             $tempRole = $_SESSION['role'];
             $tempStatus = $_SESSION['status'];
-
-
-            // dd($_SESSION);
             ?>
 
             <h2><b><?php echo $tempNama ?></b></h2>
@@ -58,6 +49,7 @@
         </div>
     </div>
     <br>
+
     <a class="btn btn-circle btn-edit-profil" id="buttonEditProfil" data-id_user="<?= $tempIdUser; ?>" data-nama="<?= $tempNama; ?>" data-username="<?= $tempUsername; ?>" data-email="<?= $tempEmail; ?>" data-role="<?= $tempRole; ?>" data-status="<?= $tempStatus; ?>">Ubah Data Profil</a>
 </center>
 

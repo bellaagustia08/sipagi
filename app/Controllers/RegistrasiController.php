@@ -167,11 +167,12 @@ class RegistrasiController extends BaseController
                 session()->setFlashdata('success', 'Anda Berhasil Mengubah Kata Sandi');
                 session()->set([
                     'id_user' => $id_user,
-                    'nama_lengkap' => $data['nama_lengkap'],
-                    'username' => $data['username'],
-                    'email' => $data['email'],
-                    'role' => $data['role'],
-                    'status' => $data['status'],
+                    'nama_lengkap' => $nama_lengkap,
+                    'username' => $username,
+                    'email' => $email,
+                    'password' => $password_baru,
+                    'role' => $role,
+                    'status' => $status,
                     'logged_in' => TRUE
                 ]);
 
@@ -186,17 +187,17 @@ class RegistrasiController extends BaseController
         }
     }
 
-
-
     public function processLupaPassword()
     {
         $to_email = $this->request->getPost('email');
         $findemail = $this->users->getByEmail($to_email);
 
         if ($findemail) {
-            $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $permitted_chars1 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $permitted_chars2 = 'abcdefghijklmnopqrstuvwxyz';
+            $permitted_chars3 = '0123456789';
 
-            function generate_string($input, $strength = 16)
+            function generate_string($input, $strength = 8)
             {
                 $input_length = strlen($input);
                 $random_string = '';
@@ -208,7 +209,7 @@ class RegistrasiController extends BaseController
                 return $random_string;
             }
 
-            $passwordplain = generate_string($permitted_chars, 6) . '123';
+            $passwordplain = generate_string($permitted_chars1, 3) . generate_string($permitted_chars2, 3) . generate_string($permitted_chars3, 3);
 
             //update ke tabel user
             $data = [
@@ -240,6 +241,79 @@ class RegistrasiController extends BaseController
             }
         } else {
             session()->setFlashdata('warning', 'Email Tidak Terdaftar! silahkan coba lagi.');
+            return redirect()->back();
+        }
+    }
+
+    public function processLupaPassword2()
+    {
+        $id_user = $this->request->getPost('id_user');
+        $nama_lengkap = $this->request->getPost('nama_lengkap');
+        $username = $this->request->getPost('username');
+        $role = $this->request->getPost('role');
+        $status = $this->request->getPost('status');
+        $to_email = $this->request->getPost('email');
+
+        if (session()->get('email') == $to_email) {
+            $findemail = $this->users->getByEmail($to_email);
+            $permitted_chars1 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $permitted_chars2 = 'abcdefghijklmnopqrstuvwxyz';
+            $permitted_chars3 = '0123456789';
+
+            function generate_string($input, $strength = 8)
+            {
+                $input_length = strlen($input);
+                $random_string = '';
+                for ($i = 0; $i < $strength; $i++) {
+                    $random_character = $input[mt_rand(0, $input_length - 1)];
+                    $random_string .= $random_character;
+                }
+
+                return $random_string;
+            }
+
+            $passwordplain = generate_string($permitted_chars1, 3) . generate_string($permitted_chars2, 3) . generate_string($permitted_chars3, 3);
+
+            //update ke tabel user
+            $data = [
+                "password" => md5($passwordplain)
+            ];
+            $this->users->updateUser($data, $findemail['id_user']);
+
+            $mail_message = 'Hallo ' . $findemail['nama_lengkap'] . ',' . "\r\n";
+            $mail_message .= '<br>Thanks for contacting regarding to forgot password,<br><br> <b> Your temporary password </b> is <b>' . $passwordplain . '</b>' . "\r\n";
+            $mail_message .= '<br><br>Silahkan perbaharui kata sandi anda.';
+            $mail_message .= '<br><br>----------------------------------------------------';
+            $mail_message .= '<br>Thanks & Regards';
+            $mail_message .= '<br>SiPaGi';
+
+            $email = service('email');
+            $email->setTo($to_email);
+            $email->setFrom('noreply@' . $_SERVER['SERVER_NAME'], 'Sipagi');
+            $email->setSubject('Atur ulang kata sandi');
+            $email->setMessage($mail_message);
+
+            if ($email->send()) {
+                // echo "Email successfully sent to $to_email...";
+                session()->setFlashdata('success', 'Atur ulang kata sandi berhasil dikirim ke email ' . $to_email);
+                session()->set([
+                    'id_user' => $id_user,
+                    'nama_lengkap' => $nama_lengkap,
+                    'username' => $username,
+                    'email' => $to_email,
+                    'password' => md5($passwordplain),
+                    'role' => $role,
+                    'status' => $status,
+                    'logged_in' => TRUE
+                ]);
+                return redirect()->back();
+            } else {
+                // echo "Email sending failed...";
+                session()->setFlashdata('error', 'Gagal mengirim atur ulang kata sandi ke email anda! silahkan coba lagi.');
+                return redirect()->back();
+            }
+        } else {
+            session()->setFlashdata('error', 'Anda Salah Memasukan Email !');
             return redirect()->back();
         }
     }

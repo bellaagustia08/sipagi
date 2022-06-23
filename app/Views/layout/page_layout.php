@@ -241,18 +241,9 @@
         });
 
         feather.replace()
-        $(function() {
-            $("#tanggal_jadwal").datepicker({
-                minDate: moment().add('d', 0).toDate(),
-            });
-
-            $("#datepicker").datepicker({
-                minDate: moment().add('d', 0).toDate(),
-            });
-        });
 
         window.setTimeout(function() {
-            $(".alert").fadeTo(100, 1).slideUp(700, function() {
+            $(".alert").fadeTo(100, 1).slideUp(1000, function() {
                 $(this).remove();
             });
         }, 1200);

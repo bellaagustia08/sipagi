@@ -74,6 +74,7 @@ $routes->post('/profil/processEditProfil', 'RegistrasiController::processEditPro
 $routes->get('/ubahKataSandi', 'RegistrasiController::indexUbahKataSandi');
 $routes->post('/ubahKataSandi/processUbahKataSandi', 'RegistrasiController::processUbahKataSandi');
 $routes->post('/lupaPassword/process', 'RegistrasiController::processLupaPassword');
+$routes->post('/lupaPassword2/process', 'RegistrasiController::processLupaPassword2');
 $routes->get('/dashboard', 'DashboardController::index');
 
 /////////////////////////////////////////////////////

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>Login</title>
@@ -155,8 +155,18 @@
                                         </div>
                                         <div class="form-group" id="show_hide_password">
                                             <label for="password">Kata Sandi <b style="color: red; font-size:large;">*</b></label>
-                                            <input type="password" name="password" id="password" placeholder="Masukan Kata Sandi" class="form-control" value="<?= set_value('password') ?>" required style="display: inline-block; width:85%">
-                                            <a href="" class="btn btn-outline-secondary"><i class="bi bi-eye-slash" aria-hidden="true"></i></a>
+                                            <div class="input-group">
+                                                <input type="password" name="password" id="password" placeholder="Masukan Kata Sandi" class="form-control" value="<?= set_value('password') ?>" required style="display: inline-block;">
+                                                <div class="input-group-append">
+                                                    <span id="mybutton" onclick="showHidePassword()" class="input-group-text">
+                                                        <!-- icon mata bawaan bootstrap  -->
+                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                                            <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-block login-tombol mb-4">Masuk</button>
@@ -209,26 +219,37 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function() {
-            $("#show_hide_password a").on('click', function(event) {
-                event.preventDefault();
-                if ($('#show_hide_password input').attr("type") == "text") {
-                    $('#show_hide_password input').attr('type', 'password');
-                    $('#show_hide_password i').addClass("bi bi-eye-slash");
-                    $('#show_hide_password i').removeClass("bi bi-eye");
-                } else if ($('#show_hide_password input').attr("type") == "password") {
-                    $('#show_hide_password input').attr('type', 'text');
-                    $('#show_hide_password i').removeClass("bi bi-eye-slash");
-                    $('#show_hide_password i').addClass("bi bi-eye");
-                }
+        window.setTimeout(function() {
+            $(".alert").fadeTo(100, 1).slideUp(1000, function() {
+                $(this).remove();
             });
+        }, 1200);
 
-            window.setTimeout(function() {
-                $(".alert").fadeTo(100, 1).slideUp(800, function() {
-                    $(this).remove();
-                });
-            }, 1200);
-        });
+        function showHidePassword() {
+            // membuat variabel berisi tipe input dari id='pass', id='pass' adalah form input password 
+            var x = document.getElementById('password').type;
+            //membuat if kondisi, jika tipe x adalah password maka jalankan perintah di bawahnya
+            if (x == 'password') {
+                //ubah form input password menjadi text
+                document.getElementById('password').type = 'text';
+
+                //ubah icon mata terbuka menjadi tertutup
+                document.getElementById('mybutton').innerHTML = `<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-slash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+                                                        <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829z"/>
+                                                        <path fill-rule="evenodd" d="M13.646 14.354l-12-12 .708-.708 12 12-.708.708z"/>
+                                                        </svg>`;
+            } else {
+                //ubah form input password menjadi text
+                document.getElementById('password').type = 'password';
+
+                //ubah icon mata terbuka menjadi tertutup
+                document.getElementById('mybutton').innerHTML = `<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                        <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                        </svg>`;
+            }
+        }
     </script>
 </body>
 

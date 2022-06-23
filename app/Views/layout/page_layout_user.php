@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
@@ -29,7 +30,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/plug-ins/1.12.1/i18n/id.json"></script>
 
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -145,17 +145,6 @@
 
 
         /* card */
-        .card#cardBeranda {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            transition: 0.3s;
-            width: 100%;
-            border-radius: 20px;
-        }
-
-        .card#cardBeranda:hover {
-            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-        }
-
         .card#cardProfil,
         .card#cardUbahKataSandi {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -202,6 +191,10 @@
         .modal#editModalPenyakit {
             top: 2%;
         }
+
+        .modal#lupaPasswordModal2 {
+            top: 15%;
+        }
     </style>
 </head>
 
@@ -223,12 +216,12 @@
     <!-- footer -->
     <?= $this->include('layout/footer') ?>
 
-    <script>
+    <script type="text/javascript">
         feather.replace()
 
         // setting tampilan window peringatan
         window.setTimeout(function() {
-            $(".alert").fadeTo(100, 1).slideUp(700, function() {
+            $(".alert").fadeTo(100, 1).slideUp(1000, function() {
                 $(this).remove();
             });
         }, 1200);
@@ -240,9 +233,85 @@
                 return false;
             return true;
         }
-    </script>
 
-    <script type="text/javascript">
+        function showHidePasswordLama() {
+            // membuat variabel berisi tipe input dari id='pass', id='pass' adalah form input password 
+            var x = document.getElementById('password_lama').type;
+            //membuat if kondisi, jika tipe x adalah password maka jalankan perintah di bawahnya
+            if (x == 'password') {
+                //ubah form input password menjadi text
+                document.getElementById('password_lama').type = 'text';
+
+                //ubah icon mata terbuka menjadi tertutup
+                document.getElementById('mybutton').innerHTML = `<svg width="1em" height="2em" viewBox="0 0 16 16" class="bi bi-eye-slash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+                                                        <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829z"/>
+                                                        <path fill-rule="evenodd" d="M13.646 14.354l-12-12 .708-.708 12 12-.708.708z"/>
+                                                        </svg>`;
+            } else {
+                //ubah form input password menjadi text
+                document.getElementById('password_lama').type = 'password';
+
+                //ubah icon mata terbuka menjadi tertutup
+                document.getElementById('mybutton').innerHTML = `<svg width="1em" height="2em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                        <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                        </svg>`;
+            }
+        }
+
+        function showHidePasswordBaru() {
+            // membuat variabel berisi tipe input dari id='pass', id='pass' adalah form input password 
+            var x = document.getElementById('password_baru').type;
+            //membuat if kondisi, jika tipe x adalah password maka jalankan perintah di bawahnya
+            if (x == 'password') {
+                //ubah form input password menjadi text
+                document.getElementById('password_baru').type = 'text';
+
+                //ubah icon mata terbuka menjadi tertutup
+                document.getElementById('mybutton_baru').innerHTML = `<svg width="1em" height="2em" viewBox="0 0 16 16" class="bi bi-eye-slash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+                                                        <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829z"/>
+                                                        <path fill-rule="evenodd" d="M13.646 14.354l-12-12 .708-.708 12 12-.708.708z"/>
+                                                        </svg>`;
+            } else {
+                //ubah form input password menjadi text
+                document.getElementById('password_baru').type = 'password';
+
+                //ubah icon mata terbuka menjadi tertutup
+                document.getElementById('mybutton_baru').innerHTML = `<svg width="1em" height="2em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                        <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                        </svg>`;
+            }
+        }
+
+        function showHidePasswordKonfirmasi() {
+            // membuat variabel berisi tipe input dari id='pass', id='pass' adalah form input password 
+            var x = document.getElementById('password_konfirmasi').type;
+            //membuat if kondisi, jika tipe x adalah password maka jalankan perintah di bawahnya
+            if (x == 'password') {
+                //ubah form input password menjadi text
+                document.getElementById('password_konfirmasi').type = 'text';
+
+                //ubah icon mata terbuka menjadi tertutup
+                document.getElementById('mybutton_konfirmasi').innerHTML = `<svg width="1em" height="2em" viewBox="0 0 16 16" class="bi bi-eye-slash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"/>
+                                                        <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829z"/>
+                                                        <path fill-rule="evenodd" d="M13.646 14.354l-12-12 .708-.708 12 12-.708.708z"/>
+                                                        </svg>`;
+            } else {
+                //ubah form input password menjadi text
+                document.getElementById('password_konfirmasi').type = 'password';
+
+                //ubah icon mata terbuka menjadi tertutup
+                document.getElementById('mybutton_konfirmasi').innerHTML = `<svg width="1em" height="2em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                        <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                        </svg>`;
+            }
+        }
+
         $(document).ready(function() {
             // show hide password 
             $("#sandi_lama a").on('click', function(event) {

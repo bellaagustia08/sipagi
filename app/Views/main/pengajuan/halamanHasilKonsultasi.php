@@ -61,162 +61,140 @@
 </script>
 
 <div class="container">
-    <div class="card" id="cardPerhatian">
-        <h6>Perhatian!</h6>
-        Salin Nomor Tiket Konsultasi Anda Untuk Mencetak Ulang Di Halaman Download !
-    </div>
-    <br>
 
-    <a class="nav-item nav-link" href="<?= base_url(); ?>/download/cetakHasilDownload/<?php echo $_SESSION['no_tiket']; ?>" id="buttonCetakHasilKonsultasi">
-        <span data-feather="printer"></span> Unduh Hasil
-    </a>
-    <br><br><br>
-
-    <div class="card" id="cardHasilKonsultasi_datapasien">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
-            <h4>Data Pasien</h4>
-            <input type="text" value="<?php echo $_SESSION['no_tiket']; ?>" id="copyText" readonly hidden>
-            <button align="right" id="copyBtn" onclick="fungsiSalinNoTiket()"><span data-feather="copy"></span> No. Tiket : <?php echo $_SESSION['no_tiket']; ?></button>
+    <?php
+    if ($konsultasi[0]['cf_gabungan'] == 0) {
+    ?>
+        <br>
+        <center>
+            <h4>Hasil Diagnosa Tidak Ditemukan</h4>
+        </center>
+    <?php
+    } else {
+    ?>
+        <div class="card" id="cardPerhatian">
+            <h6>Perhatian!</h6>
+            Salin Username Anda Untuk Konsultasi Lainnya !<br>
+            Simpan No. Tiket Konsultasi Anda Untuk Mencetak Ulang Di Halaman Download !
         </div>
         <br>
-        <?php
-        foreach ($konsultasi as $row) {
-        ?>
+
+        <a class="nav-item nav-link" href="<?= base_url(); ?>/download/cetakHasilDownload/<?php echo $_SESSION['no_tiket']; ?>" id="buttonCetakHasilKonsultasi">
+            <span data-feather="printer"></span> Unduh Hasil
+        </a>
+        <br><br><br>
+
+        <div class="card" id="cardHasilKonsultasi_datapasien">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
+                <h4>Data Pasien</h4>
+                <div class="row">
+                    <div class="col float-end">
+                        <b>Username Pasien :</b>
+                        <input id="copyText" type="text" value="<?php echo $_SESSION['username_pasien']; ?>" readonly style="width:100px; text-align:center;">
+                        <button id="copyBtn" onclick="fungsiSalinUsername()"><span data-feather="copy"></span> Salin </button>
+                    </div>
+                </div>
+            </div>
+            <br>
+
             <table>
                 <tbody>
-                    <?php
-                    foreach ($pasien as $rowpasien) {
-                        if ($row['id_pasien'] == $rowpasien->id_pasien) {
-                            // echo $rowpasien->nama_pasien;
-                    ?>
-                            <tr>
-                                <td style="width: 16%;">Nama</td>
-                                <td style="width: 3%;">:</td>
-                                <td>
-                                    <?php
-                                    echo $rowpasien->nama_pasien;
-                                    ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Username</td>
-                                <td>:</td>
-                                <td>
-                                    <?php
-                                    echo $rowpasien->username_pasien;
-                                    ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Alamat</td>
-                                <td>:</td>
-                                <td>
-                                    <?php
-                                    echo $rowpasien->alamat_pasien;
-                                    ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>No. Telepon</td>
-                                <td>:</td>
-                                <td>
-                                    <?php
-                                    echo $rowpasien->no_telp_pasien;
-                                    ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Jenis Kelamin</td>
-                                <td>:</td>
-                                <td>
-                                    <?php
-                                    echo $rowpasien->jenis_kelamin_pasien;
-                                    ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Tanggal Lahir</td>
-                                <td>:</td>
-                                <td>
-                                    <?php
-                                    echo tgl_indo($rowpasien->tanggal_lahir_pasien);
-                                    ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Umur</td>
-                                <td>:</td>
-                                <td>
-                                    <?php
-                                    echo $rowpasien->umur_pasien;
-                                    ?>
-                                </td>
-                            </tr>
-                    <?php
-                        }
-                    }
-                    ?>
-
+                    <tr>
+                        <td style="width: 14%;">No. Tiket Konsultasi</td>
+                        <td style="width: 4%;">:</td>
+                        <td> <?php echo $_SESSION['no_tiket']; ?> </td>
+                    </tr>
+                    <tr>
+                        <td>Nama</td>
+                        <td>:</td>
+                        <td> <?php echo $pasien->nama_pasien; ?> </td>
+                    </tr>
+                    <tr>
+                        <td>Alamat</td>
+                        <td>:</td>
+                        <td> <?php echo $pasien->alamat_pasien; ?> </td>
+                    </tr>
+                    <tr>
+                        <td>No. Telepon</td>
+                        <td>:</td>
+                        <td> <?php echo $pasien->no_telp_pasien; ?> </td>
+                    </tr>
+                    <tr>
+                        <td>Jenis Kelamin</td>
+                        <td>:</td>
+                        <td>
+                            <?php
+                            echo $pasien->jenis_kelamin_pasien;
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tanggal Lahir</td>
+                        <td>:</td>
+                        <td>
+                            <?php
+                            echo tgl_indo($pasien->tanggal_lahir_pasien);
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Umur</td>
+                        <td>:</td>
+                        <td>
+                            <?php
+                            echo $pasien->umur_pasien;
+                            ?>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <br>
-        <?php
-
-        }
-        ?>
-    </div>
-
-    <div class="card" id="cardHasilKonsultasi_hasildiagnosa">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
-            <h4>Hasil Diagnosa</h4>
         </div>
-        <br>
-        <?php
-        foreach ($konsultasi as $row) {
-            foreach ($penyakit as $rowpenyakit) {
-                if ($row['id_penyakit'] == $rowpenyakit->id_penyakit) {
-        ?>
-                    <img src="<?php echo $rowpenyakit->gambar_penyakit ?>" alt="" id="imageHasilGambar" style="width:250px">
-                    <br>
 
-                    <h6>Anda menderita penyakit <?php echo $rowpenyakit->nama_penyakit ?> dengan hasil hipotesis <?php echo round($row['cf_gabungan'] * 100, 2) ?>%</h6>
-                    <p style="font-size: 15px;"><?php echo $rowpenyakit->definisi_penyakit ?></p>
-                    <br>
+        <div class="card" id="cardHasilKonsultasi_hasildiagnosa">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
+                <h4>Hasil Diagnosa</h4>
+            </div>
+            <br>
 
-                    <h6>Saran Penanganan : </h6>
-                    <p style="font-size: 15px;"><?php echo $rowpenyakit->penanganan_penyakit ?></p>
-                    <br>
+            <img src="<?php echo $penyakit->gambar_penyakit ?>" alt="" id="imageHasilGambar" style="width:250px">
+            <br>
 
-                    <h6>Kemungkinan penyakit lainnya : </h6>
-                    <p style="font-size: 15px;">
-                        <?php
-                        $total = count($_SESSION['arrayCF_GabunganPerPenyakit']);
-                        $hit = 0;
-                        for ($i = 0; $i < $total; $i++) {
-                            if (
-                                $i != 0
-                                && $_SESSION['arrayCF_GabunganPerPenyakit'][$i]['cf_gabungan'] != 0
-                            ) {
-                                $hit = $hit + 1;
-                                foreach ($penyakit as $rowpenyakit) {
-                                    if ($_SESSION['arrayCF_GabunganPerPenyakit'][$i]['id_penyakit'] == $rowpenyakit->id_penyakit) {
-                                        echo $hit . '. ' . $rowpenyakit->nama_penyakit . ', Hasil hipotesis : ' . round($_SESSION['arrayCF_GabunganPerPenyakit'][$i]['cf_gabungan'] * 100, 2) . '%';
-                                    }
-                                }
+            <h6>Anda menderita penyakit <?php echo $penyakit->nama_penyakit ?> dengan hasil hipotesis <?php echo round($konsultasi[0]['cf_gabungan'] * 100, 2) ?>%</h6>
+            <p style="font-size: 15px;"><?php echo $penyakit->definisi_penyakit ?></p>
+            <br>
 
-                                echo "<br>";
+            <h6>Saran Penanganan : </h6>
+            <p style="font-size: 15px;"><?php echo $penyakit->penanganan_penyakit ?></p>
+            <br>
+
+            <h6>Kemungkinan penyakit lainnya : </h6>
+            <p style="font-size: 15px;">
+                <?php
+                $total = count($_SESSION['arrayCF_GabunganPerPenyakit']);
+                $hit = 0;
+                for ($i = 0; $i < $total; $i++) {
+                    if (
+                        $i != 0
+                        && $_SESSION['arrayCF_GabunganPerPenyakit'][$i]['cf_gabungan'] != 0
+                    ) {
+                        $hit = $hit + 1;
+                        foreach ($penyakitAll as $penyakit) {
+                            if ($_SESSION['arrayCF_GabunganPerPenyakit'][$i]['id_penyakit'] == $penyakit->id_penyakit) {
+                                echo $hit . '. ' . $penyakit->nama_penyakit . ', Hasil hipotesis : ' . round($_SESSION['arrayCF_GabunganPerPenyakit'][$i]['cf_gabungan'] * 100, 2) . '%';
                             }
                         }
-                        ?>
-                    </p>
-                    <br>
-                    <br>
-        <?php
+                        echo "<br>";
+                    }
                 }
-            }
-        }
-        ?>
-    </div>
+                ?>
+            </p>
+            <br><br>
+        </div>
+    <?php
+    }
+    ?>
+
 </div>
 
 

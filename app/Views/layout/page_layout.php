@@ -285,7 +285,8 @@
             copyText.setSelectionRange(0, 99999); /* For mobile devices */
 
             /* Copy the text inside the text field */
-            navigator.clipboard.writeText(copyText.value);
+            // navigator.clipboard.writeText(copyText.value);
+            document.execCommand('copy');
 
             /* Alert the copied text */
             // alert("Copied the text: " + copyText.value);
@@ -299,14 +300,15 @@
 
         function fungsiSalinUsername() {
             /* Get the text field */
-            var textUsername = document.getElementById("textUsername");
+            var copyText = document.getElementById("copyText");
 
             /* Select the text field */
-            textUsername.select();
-            textUsername.setSelectionRange(0, 99999); /* For mobile devices */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
 
             /* Copy the text inside the text field */
-            navigator.clipboard.writeText(textUsername.value);
+            // navigator.clipboard.writeText(copyText.value);
+            document.execCommand('copy');
 
             /* Alert the copied text */
             // alert("Copied the text: " + copyText.value);

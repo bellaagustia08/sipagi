@@ -208,64 +208,74 @@ class HomeController extends BaseController
         ///////////////////////////////////////////////////////////// End Proses Hitung /////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        ////////////////////// simpan data konsultasi //////////////////////
         // hasil hipotesis dari perhitungan cf, ambil index nol karena paling tinggi hasil hipotesisnya dari hasil sort
         $id_penyakit_fix = $arrayCF_GabunganPerPenyakit[0]['id_penyakit'];
         $cf_gabungan_fix = $arrayCF_GabunganPerPenyakit[0]['cf_gabungan'];
-        // dd($id_pasien_konsultasi);
-        $data = [
-            "no_tiket" => $no_tiket,
-            "waktu" => $waktu,
-            "id_penyakit" => $id_penyakit_fix,
-            "cf_gabungan" => $cf_gabungan_fix,
-            "id_pasien" => $id_pasien_konsultasi,
-        ];
 
-        ////////////////////// input ke tabel konsultasi //////////////////////
-        $this->konsultasi->insertKonsultasi($data);
-        $id_konsultasi = $this->konsultasi->insertId();
+        if ($cf_gabungan_fix == 0) {
+            session()->destroy();
+            return redirect()->to('/pengajuan/hasilKonsultasi');
+        } else {
+            ////////////////////// simpan data konsultasi //////////////////////
+            $data = [
+                "no_tiket" => $no_tiket,
+                "waktu" => $waktu,
+                "id_penyakit" => $id_penyakit_fix,
+                "cf_gabungan" => $cf_gabungan_fix,
+                "id_pasien" => $id_pasien_konsultasi,
+            ];
 
-        ////////////////////// input ke tabel detail_konsultasi //////////////////////
-        $totalArrayGejalaBaru = count($arrayGejalaBaru);
-        for ($i = 0; $i < $totalArrayGejalaBaru; $i++) {
-            // simpan data gejala yang dialami ke database detail_konsultasi
-            if ($arrayGejalaBaru[$i]['cf_user'] != 0) {
-                $dataDetailKonsultasi = [
-                    "id_konsultasi" => $id_konsultasi,
-                    "id_gejala" => $arrayGejala[$i]['id_gejala'],
-                    "cf_user" => $arrayGejalaBaru[$i]['cf_user'],
-                ];
-                ////////////////////// input ke tabel detail_konsultasi //////////////////////
-                $this->detail_konsultasi->insertDetailKonsultasi($dataDetailKonsultasi);
+            ////////////////////// input ke tabel konsultasi //////////////////////
+            $this->konsultasi->insertKonsultasi($data);
+            $id_konsultasi = $this->konsultasi->insertId();
+
+            ////////////////////// input ke tabel detail_konsultasi //////////////////////
+            $totalArrayGejalaBaru = count($arrayGejalaBaru);
+            for ($i = 0; $i < $totalArrayGejalaBaru; $i++) {
+                // simpan data gejala yang dialami ke database detail_konsultasi
+                if ($arrayGejalaBaru[$i]['cf_user'] != 0) {
+                    $dataDetailKonsultasi = [
+                        "id_konsultasi" => $id_konsultasi,
+                        "id_gejala" => $arrayGejala[$i]['id_gejala'],
+                        "cf_user" => $arrayGejalaBaru[$i]['cf_user'],
+                    ];
+                    ////////////////////// input ke tabel detail_konsultasi //////////////////////
+                    $this->detail_konsultasi->insertDetailKonsultasi($dataDetailKonsultasi);
+                }
             }
+
+            session()->set([
+                "no_tiket" => $no_tiket,
+                "waktu" => $waktu,
+                "id_pasien" => $id_pasien_konsultasi,
+                "nama" => $nama,
+                "username_pasien" => $username_pasien,
+                "alamat" => $alamat,
+                "no_telp" => $no_telp,
+                "tanggal_lahir" => $tanggal_lahir,
+                "umur" => $umur,
+                "jenis_kelamin" => $jenis_kelamin,
+                'arrayCF_GabunganPerPenyakit' => $arrayCF_GabunganPerPenyakit,
+            ]);
+
+            return redirect()->to('/pengajuan/hasilKonsultasi');
         }
-
-        session()->set([
-            "no_tiket" => $no_tiket,
-            "waktu" => $waktu,
-            "id_pasien" => $id_pasien_konsultasi,
-            "nama" => $nama,
-            "alamat" => $alamat,
-            "no_telp" => $no_telp,
-            "tanggal_lahir" => $tanggal_lahir,
-            "umur" => $umur,
-            "jenis_kelamin" => $jenis_kelamin,
-            'arrayCF_GabunganPerPenyakit' => $arrayCF_GabunganPerPenyakit,
-        ]);
-
-        return redirect()->to('/pengajuan/hasilKonsultasi');
     }
 
     public function halamanHasilKonsultasi()
     {
         if (session()->get('no_tiket') == null) {
-            session()->setFlashdata('warning', 'Isi Data Pengajuan Konsultasi Terlebih Dahulu !');
+            session()->setFlashdata('error', 'Isi Data Pengajuan Konsultasi Terlebih Dahulu !');
             return redirect()->to('/pengajuan');
         } else {
             $no_tiket = session()->get('no_tiket');
             $data['konsultasi'] = $this->konsultasi->getByNomorTiket($no_tiket);
-            $data['penyakit'] = $this->penyakit->findAll();
-            $data['pasien'] = $this->pasien->findAll();
+            $id_penyakit = $data['konsultasi'][0]['id_penyakit'];
+            $id_pasien = $data['konsultasi'][0]['id_pasien'];
+
+            $data['penyakitAll'] = $this->penyakit->findAll();
+            $data['penyakit'] = $this->penyakit->where('id_penyakit', $id_penyakit)->first();
+            $data['pasien'] = $this->pasien->where('id_pasien', $id_pasien)->first();
 
             return view('main/pengajuan/halamanHasilKonsultasi', $data);
         }
@@ -274,7 +284,7 @@ class HomeController extends BaseController
     public function halamanCetakHasilKonsultasi()
     {
         if (session()->get('no_tiket') == null) {
-            session()->setFlashdata('warning', 'Isi Data Pengajuan Konsultasi Terlebih Dahulu !');
+            session()->setFlashdata('error', 'Isi Data Pengajuan Konsultasi Terlebih Dahulu !');
             return redirect()->to('/pengajuan');
         } else {
             $no_tiket = session()->get('no_tiket');
@@ -312,8 +322,9 @@ class HomeController extends BaseController
         $data['konsultasi'] = $temp_konsultasi;
         $data['detail_konsultasi'] = $this->detail_konsultasi->getByIdKonsultasi($id_konsultasi);
         $data['pasien'] = $temp_pasien;
-        $data['penyakit'] = $this->penyakit->findAll();
+        $data['penyakit'] = $this->penyakit->where('id_penyakit', $temp_konsultasi->id_penyakit)->first();
         $data['gejala'] = $this->gejala->findAll();
+
         return view('main/riwayat/detail', $data);
     }
 
@@ -339,6 +350,7 @@ class HomeController extends BaseController
         $data['gejala'] = $this->gejala->findAll();
         $data['pasien'] = $this->pasien->findAll();
 
+        session()->destroy();
         return view('main/download/cetakDownload', $data);
     }
 

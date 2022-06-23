@@ -54,25 +54,16 @@
         <br>
 
         <h6>Hasil Diagnosa : </h6>
-        <?php
-        foreach ($penyakit as $rowpenyakit) {
-            if ($rowpenyakit->id_penyakit == $konsultasi->id_penyakit) {
-        ?>
-                <img src="<?php echo $rowpenyakit->gambar_penyakit ?>" alt="" id="imageHasilGambar" style="width:250px">
-                <br>
+        <img src="<?php echo $penyakit->gambar_penyakit ?>" alt="" id="imageHasilGambar" style="width:250px">
+        <br>
 
-                <h6>Anda menderita penyakit <?php echo $rowpenyakit->nama_penyakit ?> dengan hasil hipotesis <?php echo round($konsultasi->cf_gabungan * 100, 2) ?>%</h6>
-                <p style="font-size: 15px;"><?php echo $rowpenyakit->definisi_penyakit ?></p>
-                <br>
+        <h6>Anda menderita penyakit <?php echo $penyakit->nama_penyakit ?> dengan hasil hipotesis <?php echo round($konsultasi->cf_gabungan * 100, 2) ?>%</h6>
+        <p style="font-size: 15px;"><?php echo $penyakit->definisi_penyakit ?></p>
+        <br>
 
-                <h6>Saran Penanganan : </h6>
-                <p style="font-size: 15px;"><?php echo $rowpenyakit->penanganan_penyakit ?></p>
-                <br>
-                <br>
-        <?php
-            }
-        }
-        ?>
+        <h6>Saran Penanganan : </h6>
+        <p style="font-size: 15px;"><?php echo $penyakit->penanganan_penyakit ?></p>
+        <br><br>
     </div>
 </div>
 <?= $this->endSection() ?>

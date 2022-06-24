@@ -36,6 +36,7 @@
             background-repeat: no-repeat;
             background-size: cover;
             font-family: "Karla", sans-serif;
+            background-image: url(<?php echo base_url('public/picture/wallpaper3.jpg'); ?>);
         }
 
         th {
@@ -89,12 +90,6 @@
             font: normal 80% Verdana, Trebuchet, Arial, Sans-serif;
         }
 
-        @media (max-width: 1000px) {
-            .login-card .card-body {
-                padding: 35px 24px;
-            }
-        }
-
         .btn.btn-circle.btn-simpan-lupa-password {
             background-color: #827397;
             color: white;
@@ -108,11 +103,35 @@
         .modal {
             top: 20%;
         }
+
+        @media (max-width: 1650px) {
+            .login-card {
+                width: 80%;
+            }
+
+            .login-card .card-body {
+                padding: 35px 24px;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .login-card {
+                width: 100%;
+            }
+
+            .login-card-img {
+                margin-left: -120px;
+                object-fit: cover;
+            }
+
+            .login-card .card-body {
+                padding: 35px 24px;
+            }
+        }
     </style>
 </head>
 
-<body style="background-image: url(<?php echo base_url('public/picture/wallpaper3.jpg'); ?>)">
-
+<body>
     <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
         <div class="container">
             <center>

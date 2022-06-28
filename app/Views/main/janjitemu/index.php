@@ -122,7 +122,7 @@
         <br>
 
         <?php
-        if (isset($checkboxDokter)) {
+        if (isset($_GET['checkboxDokter'])) {
             include "koneksi.php";
             $id_dokter_cek = $checkboxDokter[0];
             $sql = "SELECT * FROM jadwal WHERE id_dokter = " . $id_dokter_cek . " ";

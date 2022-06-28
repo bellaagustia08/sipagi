@@ -122,127 +122,136 @@
         <br>
 
         <?php
-        if (isset($_GET['checkboxDokter'])) {
+        if (isset($checkboxDokter)) {
+            include "koneksi.php";
+            $id_dokter_cek = $checkboxDokter[0];
+            $sql = "SELECT * FROM jadwal WHERE id_dokter = " . $id_dokter_cek . " ";
+
+            $hasil = mysqli_query($kon, $sql);
+            $data = mysqli_fetch_array($hasil);
+
+            if ($data == null) {
         ?>
+                <h6>Jadwal Tidak Tersedia</h6>
+            <?php
+            } else {
+            ?>
+                <?php if (!empty(session()->getFlashdata('warning2'))) : ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?php echo session()->getFlashdata('warning2'); ?>
+                    </div>
+                <?php endif; ?>
 
-            <?php if (!empty(session()->getFlashdata('warning2'))) : ?>
-                <div class="alert alert-warning" role="alert">
-                    <?php echo session()->getFlashdata('warning2'); ?>
-                </div>
-            <?php endif; ?>
+                <!-- form untuk update tabel jadwal jika ada yang membuat janji temu -->
+                <form method="post" id="formJadwal" action="<?= base_url(); ?>/janjitemu/process">
+                    <?= csrf_field() ?>
+                    <div class="card align-self-center" id="cardKonsultasi">
+                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
+                            <?php
+                            foreach ($dokter as $row) {
+                                if ($row->id_dokter == $data['id_dokter']) {
+                                    $nama_dokter = $row->nama_dokter;
+                                }
+                            }
+                            ?>
+                            <h3>Jadwal Janji Temu <?php echo $nama_dokter;  ?></h3>
+                        </div>
+                        <br>
 
-            <!-- form untuk update tabel jadwal jika ada yang membuat janji temu -->
-            <form method="post" id="formJadwal" action="<?= base_url(); ?>/janjitemu/process">
-                <?= csrf_field() ?>
-                <div class="card align-self-center" id="cardKonsultasi">
-                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
                         <?php
-                        foreach ($dokter as $row) {
-                            if ($row->id_dokter == $checkboxDokter[0]) {
-                                $nama_dokter = $row->nama_dokter;
+                        $hitung = 0;
+                        foreach ($jadwal as $row) {
+                            if ($row->id_dokter == $data['id_dokter']) {
+                                if ($row->status == 'Tidak Aktif') {
+                        ?>
+                                    <div class="input-group mb-3" style="width:fit-content; position:relative;">
+                                        <div class="input-group-text">
+                                            <input class="form-check-input mt-0" type="checkbox" id="checkboxJadwal" name="jadwal[]" value="<?php echo $row->id_jadwal ?>" autofocus>
+                                        </div>
+                                        <input type="text" class="form-control" value="<?php echo tgl_indo($row->tanggal_jadwal) ?>" style="width:35%;">
+                                        <input type="text" class="form-control" value="<?php echo $row->waktu_jadwal ?>" style="text-align:center ;">
+                                    </div>
+                        <?php
+                                }
                             }
                         }
                         ?>
-                        <h3>Jadwal Janji Temu <?php echo $nama_dokter;  ?></h3>
+                        <br>
                     </div>
                     <br>
 
-                    <?php
-                    $hitung = 0;
-                    foreach ($jadwal as $row) {
-                        $hitung = $hitung + 1;
-                        if ($row->id_dokter == $checkboxDokter[0]) {
-                            if ($row->status == 'Tidak Aktif') {
-                    ?>
-                                <h6>
-                                    <input type="checkbox" id="checkboxJadwal" name="jadwal[]" value="<?php echo $row->id_jadwal ?>" autofocus>
-                                    &nbsp; <span data-feather="calendar"></span> <?php echo tgl_indo($row->tanggal_jadwal) ?>
-                                    &nbsp; |
-                                    &nbsp; <span data-feather="clock"></span> <?php echo $row->waktu_jadwal ?>
-                                </h6>
-                    <?php
-                            }
-                        }
-                    }
-                    ?>
+                    <div class="card align-self-center" id="cardDataDiri">
+                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
+                            <h3>Form Data Diri</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <br>
+                                <h6>Nama Lengkap</h6>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" name="nama" id="nama" required autofocus value="<?= set_value('nama') ?>">
+                                    <label>Masukan Nama Lengkap &nbsp;<b style="color: red; font-size:large;">*</b></label>
+                                </div>
+                                <!-- <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" name="username_pasien" id="username_pasien" required autofocus value="<?= set_value('username_pasien') ?>" minlength="8" maxlength="10" title="Username harus 8-10 karakter dan mengandung minimal 1 angka." pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[a-zA-Z]).*$">
+                                    <label>Masukan Username &nbsp;<b style="color: red; font-size:large;">*</b></label>
+                                </div> -->
+                                <h6>Alamat</h6>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" name="alamat" id="alamat" required autofocus value="<?= set_value('alamat') ?>">
+                                    <label>Masukan Alamat &nbsp;<b style="color: red; font-size:large;">*</b></label>
+                                </div>
+                                <h6>Nomor Telepon</h6>
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" name="no_telp" id="no_telp" required autofocus value="<?= set_value('no_telp') ?>" maxlength="13" onkeypress="return hanyaAngka(event)">
+                                    <label>Masukan Nomor Telepon &nbsp;<b style="color: red; font-size:large;">*</b></label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <br>
+                                <h6>Tanggal Lahir</h6>
+                                <div class="form-floating mb-3">
+                                    <input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir" required autofocus value="<?= set_value('tanggal_lahir') ?>">
+                                    <label>Pilih Tanggal Lahir &nbsp;<b style="color: red; font-size:large;">*</b></label>
+                                </div>
+                                <h6>Jenis Kelamin</h6>
+                                <div class="form-floating mb-3">
+                                    <select name="jenis_kelamin" id="jenis_kelamin" class="selectpicker form-control" data-live-search="true" required autofocus value="<?= set_value('jenis_kelamin') ?>">
+                                        <option <?php if (set_value('jenis_kelamin') == '') {
+                                                    echo 'selected';
+                                                } ?> value="<?php echo '' ?>"> Jenis Kelamin</option>
+                                        <option <?php if (set_value('jenis_kelamin') == 'Perempuan') {
+                                                    echo 'selected';
+                                                } ?> value="<?php echo 'Perempuan' ?>">Perempuan</option>
+                                        <option <?php if (set_value('jenis_kelamin') == 'Laki-laki') {
+                                                    echo 'selected';
+                                                } ?> value="<?php echo 'Laki-laki' ?>">Laki-laki</option>
+                                    </select>
+                                    <label>Pilih Jenis Kelamin &nbsp;<b style="color: red; font-size:large;">*</b></label>
+                                </div>
+                                <h6>Umur</h6>
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" name="umur" id="umur" required autofocus value="<?= set_value('umur') ?>" onkeypress="return hanyaAngka(event)" min="1">
+                                    <label>Masukan Umur &nbsp;<b style="color: red; font-size:large;">*</b></label>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
                     <br>
-                </div>
-                <br>
 
-                <div class="card align-self-center" id="cardDataDiri">
-                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
-                        <h3>Form Data Diri</h3>
+                    <div class="form-group">
+                        <center>
+                            <button type="submit" class="btn btn-circle" id="buttonKirimJanjiTemu">Kirim Permintaan Janji Temu</button>
+                        </center>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <br>
-                            <h6>Nama Lengkap</h6>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="nama" id="nama" required autofocus value="<?= set_value('nama') ?>">
-                                <label>Masukan Nama Lengkap &nbsp;<b style="color: red; font-size:large;">*</b></label>
-                            </div>
-                            <!-- <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="username_pasien" id="username_pasien" required autofocus value="<?= set_value('username_pasien') ?>" minlength="8" maxlength="10" title="Username harus 8-10 karakter dan mengandung minimal 1 angka." pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[a-zA-Z]).*$">
-                            <label>Masukan Username &nbsp;<b style="color: red; font-size:large;">*</b></label>
-                        </div> -->
-                            <h6>Alamat</h6>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="alamat" id="alamat" required autofocus value="<?= set_value('alamat') ?>">
-                                <label>Masukan Alamat &nbsp;<b style="color: red; font-size:large;">*</b></label>
-                            </div>
-                            <h6>Nomor Telepon</h6>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="no_telp" id="no_telp" required autofocus value="<?= set_value('no_telp') ?>" maxlength="13" onkeypress="return hanyaAngka(event)">
-                                <label>Masukan Nomor Telepon &nbsp;<b style="color: red; font-size:large;">*</b></label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <br>
-                            <h6>Tanggal Lahir</h6>
-                            <div class="form-floating mb-3">
-                                <input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir" required autofocus value="<?= set_value('tanggal_lahir') ?>">
-                                <label>Pilih Tanggal Lahir &nbsp;<b style="color: red; font-size:large;">*</b></label>
-                            </div>
-                            <h6>Jenis Kelamin</h6>
-                            <div class="form-floating mb-3">
-                                <select name="jenis_kelamin" id="jenis_kelamin" class="selectpicker form-control" data-live-search="true" required autofocus value="<?= set_value('jenis_kelamin') ?>">
-                                    <option <?php if (set_value('jenis_kelamin') == '') {
-                                                echo 'selected';
-                                            } ?> value="<?php echo '' ?>"> Jenis Kelamin</option>
-                                    <option <?php if (set_value('jenis_kelamin') == 'Perempuan') {
-                                                echo 'selected';
-                                            } ?> value="<?php echo 'Perempuan' ?>">Perempuan</option>
-                                    <option <?php if (set_value('jenis_kelamin') == 'Laki-laki') {
-                                                echo 'selected';
-                                            } ?> value="<?php echo 'Laki-laki' ?>">Laki-laki</option>
-                                </select>
-                                <label>Pilih Jenis Kelamin &nbsp;<b style="color: red; font-size:large;">*</b></label>
-                            </div>
-                            <h6>Umur</h6>
-                            <div class="form-floating mb-3">
-                                <input type="number" class="form-control" name="umur" id="umur" required autofocus value="<?= set_value('umur') ?>" onkeypress="return hanyaAngka(event)">
-                                <label>Masukan Umur &nbsp;<b style="color: red; font-size:large;">*</b></label>
-                            </div>
-                            <br>
-                        </div>
-                    </div>
-                </div>
-                <br>
-
-                <div class="form-group">
-                    <center>
-                        <button type="submit" class="btn btn-circle" id="buttonSimpanPengajuanKonsultasi">Kirim Permintaan Janji Temu</button>
-                    </center>
-                </div>
-                <br>
-            </form>
-
-        <?php
+                    <br>
+                </form>
+            <?php
+            }
         } else {
-            echo 'tidak ada dokter yang di pilih';
+            echo 'Tidak Ada Dokter yang Dipilih';
         }
-        ?>
-        <?php
     }
     ///////////////////// fitur cari tidak digunakan /////////////////////
     ///////////////////// fitur cari digunakan /////////////////////
@@ -251,14 +260,12 @@
         $hasil2 = mysqli_query($kon, $sql);
         $data = mysqli_fetch_array($hasil);
 
-        // dd($data);
         if ($data == null) {
-        ?>
+            ?>
             <h6>Nama Dokter Tidak Ditemukan</h6>
         <?php
         } else {
         ?>
-
             <h4>Pilih Dokter</h4>
             <form method="get" name="form" action="<?= base_url(); ?>/janjitemu">
                 <?php
@@ -281,134 +288,8 @@
                 <input type="submit" value="Lihat Jadwal">
             </form>
             <br>
-
-            <?php
-            if (isset($_GET['checkboxDokter'])) {
-                //     $checkboxDokter = $_GET['checkboxDokter'];
-                //     // dd($checkboxDokter);
-                //     echo 'Id. Dokter : ';
-                //     print_r($checkboxDokter[0]);
-            ?>
-                <!-- form untuk update tabel jadwal jika ada yang membuat janji temu -->
-                <form method="post" id="formJadwal" action="<?= base_url(); ?>/janjitemu/process">
-                    <?= csrf_field() ?>
-                    <div class="row">
-                        <div class="card align-self-center" id="cardKonsultasi">
-                            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
-                                <?php
-                                foreach ($dokter as $row) {
-                                    if ($row->id_dokter == $checkboxDokter[0]) {
-                                        $nama_dokter = $row->nama_dokter;
-                                    }
-                                }
-                                ?>
-                                <h3>Jadwal Janji Temu <?php echo $nama_dokter;  ?></h3>
-                            </div>
-                            <br>
-                            <?php
-                            $hitung = 0;
-                            foreach ($jadwal as $row) {
-                                $hitung = $hitung + 1;
-                                if ($row->id_dokter == $checkboxDokter[0]) {
-                                    if ($row->status == 'Tidak Aktif') {
-                            ?>
-                                        <h6>
-                                            <input type="checkbox" id="checkboxJadwal" name="jadwal[]" value="<?php echo $row->id_jadwal ?>" autofocus>
-                                            &nbsp; <span data-feather="calendar"></span> <?php echo tgl_indo($row->tanggal_jadwal) ?>
-                                            &nbsp; |
-                                            &nbsp; <span data-feather="clock"></span> <?php echo $row->waktu_jadwal ?>
-                                        </h6>
-                            <?php
-                                    }
-                                }
-                            } ?>
-
-                            <br>
-                        </div>
-                    </div>
-                    <br>
-                    <?php if (!empty(session()->getFlashdata('warning'))) : ?>
-                        <div class="alert alert-warning" role="alert">
-                            <?php echo session()->getFlashdata('warning'); ?>
-                        </div>
-                    <?php endif; ?>
-                    <br>
-                    <h4>Form Data Diri Pasien</h4>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <br>
-                            <h6>Nama Lengkap</h6>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="nama" id="nama" required autofocus value="<?= set_value('nama') ?>">
-                                <label>Masukan Nama Lengkap &nbsp;<b style="color: red; font-size:large;">*</b></label>
-                            </div>
-                            <h6>Username</h6>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="username_pasien" id="username_pasien" required autofocus value="<?= set_value('username_pasien') ?>" minlength="8" maxlength="10" title="Username harus 8-10 karakter dan mengandung minimal 1 angka." pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[a-zA-Z]).*$">
-                                <label>Masukan Username &nbsp;<b style="color: red; font-size:large;">*</b></label>
-                            </div>
-                            <h6>Alamat</h6>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="alamat" id="alamat" required autofocus value="<?= set_value('alamat') ?>">
-                                <label>Masukan Alamat &nbsp;<b style="color: red; font-size:large;">*</b></label>
-                            </div>
-                            <h6>Nomor Telepon</h6>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="no_telp" id="no_telp" required autofocus value="<?= set_value('no_telp') ?>" maxlength="13" onkeypress="return hanyaAngka(event)">
-                                <label>Masukan Nomor Telepon &nbsp;<b style="color: red; font-size:large;">*</b></label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <br>
-                            <h6>Tanggal Lahir</h6>
-                            <div class="form-floating mb-3">
-                                <input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir" required autofocus value="<?= set_value('tanggal_lahir') ?>">
-                                <label>Pilih Tanggal Lahir &nbsp;<b style="color: red; font-size:large;">*</b></label>
-                            </div>
-                            <h6>Jenis Kelamin</h6>
-                            <div class="form-floating mb-3">
-                                <select name="jenis_kelamin" id="jenis_kelamin" class="selectpicker form-control" data-live-search="true" required autofocus value="<?= set_value('jenis_kelamin') ?>">
-                                    <option <?php if (set_value('jenis_kelamin') == '') {
-                                                echo 'selected';
-                                            } ?> value="<?php echo '' ?>"> Jenis Kelamin</option>
-                                    <option <?php if (set_value('jenis_kelamin') == 'Perempuan') {
-                                                echo 'selected';
-                                            } ?> value="<?php echo 'Perempuan' ?>">Perempuan</option>
-                                    <option <?php if (set_value('jenis_kelamin') == 'Laki-laki') {
-                                                echo 'selected';
-                                            } ?> value="<?php echo 'Laki-laki' ?>">Laki-laki</option>
-                                </select>
-                                <label>Pilih Jenis Kelamin &nbsp;<b style="color: red; font-size:large;">*</b></label>
-                            </div>
-                            <h6>Umur</h6>
-                            <div class="form-floating mb-3">
-                                <input type="number" class="form-control" name="umur" id="umur" required autofocus value="<?= set_value('umur') ?>">
-                                <label>Masukan Umur &nbsp;<b style="color: red; font-size:large;">*</b></label>
-                            </div>
-                            <br>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <center>
-                            <button type="submit" class="btn btn-circle" id="buttonSimpanPengajuanKonsultasi">Kirim Permintaan Janji Temu</button>
-                        </center>
-                    </div>
-                    <br>
-                </form>
-
-            <?php
-            } else {
-                echo 'tidak ada dokter yang di pilih';
-            }
-            ?>
-
-
-        <?php
-        }
-
-        ?>
-
     <?php
+        }
     }
     ///////////////////// fitur cari digunakan /////////////////////
     ?>

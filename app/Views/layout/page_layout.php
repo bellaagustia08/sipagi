@@ -135,7 +135,8 @@
         }
 
         /* style button */
-        #buttonSimpanPengajuanKonsultasi {
+        #buttonSimpanPengajuanKonsultasi,
+        #buttonKirimJanjiTemu {
             width: 100%;
             background-color: #FFD365;
         }
@@ -327,6 +328,61 @@
                 alert('Hanya bisa pilih salah satu jadwal !');
             }
         });
+
+        function cekSpasiNama() {
+            const variabel = document.querySelector("#nama");
+            const button = document.querySelector("#buttonKirimJanjiTemu");
+            if (variabel.value.toString().trim() === "") {
+                button.setAttribute("disabled", "disabled");
+                alert("Nama Harus Di Isi dan Tidak Boleh Diawali Spasi !")
+            } else {
+                button.removeAttribute("disabled");
+            }
+        }
+
+        function cekSpasiAlamat() {
+            const variabel = document.querySelector("#alamat");
+            const button = document.querySelector("#buttonKirimJanjiTemu");
+            if (variabel.value.toString().trim() === "") {
+                button.setAttribute("disabled", "disabled");
+                alert("Alamat Harus Di Isi dan Tidak Boleh Diawali Spasi !")
+            } else {
+                button.removeAttribute("disabled");
+            }
+        }
+
+        function cekSpasiNamaInPengajuan() {
+            const variabel = document.querySelector("#nama");
+            const button = document.querySelector("#buttonSimpanPengajuanKonsultasi");
+            if (variabel.value.toString().trim() === "") {
+                button.setAttribute("disabled", "disabled");
+                alert("Nama Harus Di Isi dan Tidak Boleh Diawali Spasi !")
+            } else {
+                button.removeAttribute("disabled");
+            }
+        }
+
+        function cekSpasiAlamatInPengajuan() {
+            const variabel = document.querySelector("#alamat");
+            const button = document.querySelector("#buttonSimpanPengajuanKonsultasi");
+            if (variabel.value.toString().trim() === "") {
+                button.setAttribute("disabled", "disabled");
+                alert("Alamat Harus Di Isi dan Tidak Boleh Diawali Spasi !")
+            } else {
+                button.removeAttribute("disabled");
+            }
+        }
+
+        function cekSpasiUsernameInPengajuan() {
+            const variabel = document.querySelector("#username_pasien");
+            const button = document.querySelector("#buttonSimpanPengajuanKonsultasi");
+            if (variabel.value.toString().trim() === "") {
+                button.setAttribute("disabled", "disabled");
+                alert("Username Pasien Harus Di Isi dan Tidak Boleh Diawali Spasi !")
+            } else {
+                button.removeAttribute("disabled");
+            }
+        }
     </script>
 </body>
 

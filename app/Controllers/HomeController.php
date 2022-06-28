@@ -212,9 +212,11 @@ class HomeController extends BaseController
         $id_penyakit_fix = $arrayCF_GabunganPerPenyakit[0]['id_penyakit'];
         $cf_gabungan_fix = $arrayCF_GabunganPerPenyakit[0]['cf_gabungan'];
 
+        // jika masukan form gejala tidak ada yang dipilih
         if ($cf_gabungan_fix == 0) {
-            session()->destroy();
-            return redirect()->to('/pengajuan/hasilKonsultasi');
+            $this->pasien->delete($id_pasien_konsultasi);
+            session()->setFlashdata('error', 'Isi Data Pengajuan Konsultasi Dengan Lengkap !');
+            return redirect()->back()->withInput();
         } else {
             ////////////////////// simpan data konsultasi //////////////////////
             $data = [

@@ -171,7 +171,7 @@
                     </div>
                     <h6>Nomor Telepon</h6>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="no_telp" id="no_telp" required autofocus value="<?= set_value('no_telp') ?>" maxlength="13" onkeypress="return hanyaAngka(event)">
+                        <input type="number" class="form-control" name="no_telp" id="no_telp" required autofocus value="<?= set_value('no_telp') ?>" maxlength="13" onkeypress="return hanyaAngka(event)">
                         <label>Masukan Nomor Telepon &nbsp;<b style="color: red; font-size:large;">*</b></label>
                     </div>
                     <h6>Tanggal Lahir</h6>

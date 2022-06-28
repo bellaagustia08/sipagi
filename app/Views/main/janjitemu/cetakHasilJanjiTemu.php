@@ -75,8 +75,8 @@
                         if ($row->id_pasien == $rowpasien->id_pasien) {
                     ?>
                             <tr>
-                                <td style="width: 16%;">Nama</td>
-                                <td style="width: 3%;">:</td>
+                                <td style="width: 125px;">Nama</td>
+                                <td style="width: 25px;">:</td>
                                 <td>
                                     <?php
                                     echo $rowpasien->nama_pasien;

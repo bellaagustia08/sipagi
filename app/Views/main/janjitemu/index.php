@@ -168,8 +168,8 @@
                                         <div class="input-group-text">
                                             <input class="form-check-input mt-0" type="checkbox" id="checkboxJadwal" name="jadwal[]" value="<?php echo $row->id_jadwal ?>" autofocus>
                                         </div>
-                                        <input type="text" class="form-control" value="<?php echo tgl_indo($row->tanggal_jadwal) ?>" style="width:35%;">
-                                        <input type="text" class="form-control" value="<?php echo $row->waktu_jadwal ?>" style="text-align:center ;">
+                                        <input type="text" class="form-control" value="<?php echo tgl_indo($row->tanggal_jadwal) ?>" style="width:35%;" readonly>
+                                        <input type="text" class="form-control" value="<?php echo $row->waktu_jadwal ?>" style="text-align:center ;" readonly>
                                     </div>
                         <?php
                                 }

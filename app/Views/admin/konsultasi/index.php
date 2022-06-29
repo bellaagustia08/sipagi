@@ -26,21 +26,15 @@
 <?php endif; ?>
 
 
-<a style="float: right;" class="nav-link" href="<?= base_url(); ?>/konsultasi">
-    <span data-feather="refresh-ccw"></span> Refresh
-</a>
-
-<br><br>
-
 <table id="table-datatables" class="table table-hover row-border">
     <thead>
         <tr>
-            <th>No.Urut</th>
+            <th>No</th>
             <th>No.Tiket</th>
             <th>Username</th>
             <th>Penyakit</th>
             <th>Persentase</th>
-            <!-- <th>Aksi</th> -->
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -51,12 +45,12 @@
         ?>
             <tr>
                 <td style="width: 5%;" align="center"><?php echo $hitung ?></td>
-                <td style="width:8%;" align="center"><?php echo $row->no_tiket ?></td>
-                <td style="width:16%;">
+                <td style="width:10%;" align="center"><?php echo $row->no_tiket ?></td>
+                <td style="width:25%;">
                     <?php
-                    foreach ($member as $rowmember) {
-                        if ($rowmember->username_member == $row->username_member) {
-                            echo $rowmember->nama_member;
+                    foreach ($pasien as $rowpasien) {
+                        if ($rowpasien->id_pasien == $row->id_pasien) {
+                            echo $rowpasien->nama_pasien;
                         }
                     }
                     ?>
@@ -64,17 +58,17 @@
                 <?php
                 foreach ($penyakit as $rowPenyakit) {
                     if ($rowPenyakit->id_penyakit == $row->id_penyakit) { ?>
-                        <td style="width:16%;"><?php echo $rowPenyakit->nama_penyakit ?></td>
+                        <td style="width:25%;"><?php echo $rowPenyakit->nama_penyakit ?></td>
                     <?php break;
                     } ?>
                 <?php
                 }
                 ?>
-                <td style="width:5%;"><?php echo round($row->cf_gabungan * 100, 2) ?> %</td>
-                <!-- <td style="width: 12%;" align="center">
-                    <a class="btn btn-primary btn-sm btn-edit-konsultasi" data-id_konsultasi="<?= $row->id_konsultasi; ?>" data-username_member="<?= $row->username_member; ?>" >Ubah</a>
-                    <a class="btn btn-danger btn-sm btn-delete-konsultasi" data-id_konsultasi="<?= $row->id_konsultasi; ?>">Hapus</a>
-                </td> -->
+                <td style="width:5%;" align="center"><?php echo round($row->cf_gabungan * 100, 2) ?> %</td>
+                <td style="width: 15%;" align="center">
+                    <a style="width: 60px ;" class="btn btn-sm btn-primary" href="<?= base_url(); ?>/konsultasi/detail/<?php echo $row->id_konsultasi ?>">Detail</a>
+                    <a style="width: 60px ;" class="btn btn-danger btn-sm btn-delete-konsultasi" data-id_konsultasi="<?= $row->id_konsultasi; ?>">Hapus</a>
+                </td>
             </tr>
         <?php } ?>
     </tbody>
@@ -94,7 +88,7 @@
                     <input type="text" hidden class="form-control id_konsultasi" name="id_konsultasi">
                 </div>
                 <div class="form-group">
-                    <input type="text" hidden class="form-control id_member" name="id_member">
+                    <input type="text" hidden class="form-control id_pasien" name="id_pasien">
                 </div>
                 <div class="form-group">
                     <input type="text" hidden class="form-control id_penyakit" name="id_penyakit">

@@ -167,6 +167,20 @@
             border-radius: 10px;
         }
 
+        #cardDetailDataPasien,
+        #cardDetailKonsultasi {
+            box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
+            height: fit-content;
+            position: relative;
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-top: 25px;
+            padding-bottom: 10px;
+            background-image: url(<?php echo base_url('public/picture/wallpaper3.jpg'); ?>);
+            background-size: cover;
+            margin-bottom: 2%;
+        }
+
         @media (max-width: 1000.98px) {
             .card#cardProfil {
                 width: 100%;
@@ -232,6 +246,10 @@
             if (angka != 46 && angka > 31 && (angka < 48 || angka > 57))
                 return false;
             return true;
+        }
+
+        function goBack() {
+            window.history.back()
         }
 
         function showHidePasswordLama() {

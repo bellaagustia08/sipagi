@@ -28,6 +28,10 @@
                         <span data-feather="calendar"></span>
                         Jadwal Janji Temu
                     </a>
+                    <a class="nav-item nav-link" href="<?= base_url(); ?>/konsultasi">
+                        <span data-feather="database"></span>
+                        Konsultasi
+                    </a>
                 <?php }
                 // role sebagai pakar 
                 elseif ($role == "Pakar") { ?>

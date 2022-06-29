@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Models\UsersModel;
 use App\Models\KonsultasiModel;
+use App\Models\DetailKonsultasiModel;
+use App\Models\GejalaModel;
 use App\Models\PenyakitModel;
 use App\Models\PasienModel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -17,6 +19,8 @@ class KonsultasiController extends BaseController
     {
         $this->users = new UsersModel();
         $this->konsultasi = new KonsultasiModel();
+        $this->detail_konsultasi = new DetailKonsultasiModel();
+        $this->gejala = new GejalaModel();
         $this->penyakit = new PenyakitModel();
         $this->pasien = new PasienModel();
     }
@@ -25,22 +29,31 @@ class KonsultasiController extends BaseController
     {
         helper('form');
 
-        // if (($_SESSION['role']) == "Admin") {
-        //     $data['konsultasi'] = $this->konsultasi->findAll();
-        //     $data['penyakit'] = $this->penyakit->findAll();
-        //     $data['user'] = $this->users->getDataUser();
+        if (($_SESSION['role']) == "Admin") {
+            $data['konsultasi'] = $this->konsultasi->orderBy('id_konsultasi', 'DESC')->findAll();
+            $data['penyakit'] = $this->penyakit->findAll();
+            $data['pasien'] = $this->pasien->findAll();
+            $data['user'] = $this->users->getDataUser();
 
-        //     return view('admin/konsultasi/index', $data);
-        // } else {
-        //     return redirect()->to('/dashboard');
-        // }
+            return view('admin/konsultasi/index', $data);
+        } else {
+            return redirect()->to('/dashboard');
+        }
+    }
 
-        $data['konsultasi'] = $this->konsultasi->findAll();
-        $data['penyakit'] = $this->penyakit->findAll();
-        $data['pasien'] = $this->pasien->findAll();
-        $data['user'] = $this->users->getDataUser();
+    public function detailkonsultasi($id_konsultasi)
+    {
+        helper('form');
+        $temp_konsultasi = $this->konsultasi->where('id_konsultasi', $id_konsultasi)->first();
+        $temp_pasien = $this->pasien->where('id_pasien', $temp_konsultasi->id_pasien)->first();
 
-        return view('admin/konsultasi/index', $data);
+        $data['konsultasi'] = $temp_konsultasi;
+        $data['pasien'] = $temp_pasien;
+        $data['detail_konsultasi'] = $this->detail_konsultasi->getByIdKonsultasi($id_konsultasi);
+        $data['penyakit'] = $this->penyakit->where('id_penyakit', $temp_konsultasi->id_penyakit)->first();
+        $data['gejala'] = $this->gejala->findAll();
+
+        return view('admin/konsultasi/detail', $data);
     }
 
     public function processEdit()

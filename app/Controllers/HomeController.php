@@ -47,6 +47,19 @@ class HomeController extends BaseController
         return view('main/pengajuan/index', $data);
     }
 
+    // tambahan belum dipakai
+    public function formGejala($id_pasien)
+    {
+        helper('form');
+        $data['id_pasien'] = $id_pasien;
+        $data['gejala'] = $this->gejala->findAll();
+        $data['penyakit'] = $this->penyakit->findAll();
+        $data['aturan'] = $this->aturan->findAll();
+        $data['pasien'] = $this->pasien->findAll();
+
+        return view('main/pengajuan/formGejala', $data);
+    }
+
     public function processKonsultasi()
     {
         // deklarasi

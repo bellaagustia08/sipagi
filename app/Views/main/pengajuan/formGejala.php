@@ -46,6 +46,15 @@
         return $pecahkan[2] . ' ' . $bulan[(int) $pecahkan[1]] . ' ' . $pecahkan[0];
     }
     ?>
+
+    window.onload = function() {
+        $('#tanggal_lahir').on('change', function() {
+            var dob = new Date(this.value);
+            var today = new Date();
+            var age = Math.floor((today - dob) / (365.25 * 24 * 60 * 60 * 1000));
+            $('#umur').val(age);
+        });
+    }
 </script>
 
 
@@ -71,6 +80,9 @@
         <?php echo session()->getFlashdata('warning'); ?>
     </div>
 <?php endif; ?>
+
+
+
 
 <!-- if tidak ada session -->
 

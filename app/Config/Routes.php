@@ -42,6 +42,7 @@ $routes->get('/selesai', 'HomeController::selesai');
 
 // pengajuan konsultasi 
 $routes->get('/pengajuan', 'HomeController::index');
+$routes->get('/pengajuan/form_gejala/(:alphanum)', 'HomeController::formGejala/$1');
 $routes->post('/pengajuan/process', 'HomeController::processKonsultasi');
 $routes->get('/pengajuan/hasilKonsultasi', 'HomeController::halamanHasilKonsultasi');
 $routes->get('/pengajuan/hasilKonsultasi/cetakHasil', 'HomeController::halamanCetakHasilKonsultasi');
@@ -107,8 +108,9 @@ $routes->post('/jadwal/delete', 'JadwalController::delete');
 
 //bagian Konsultasi tidak terpakai
 $routes->get('/konsultasi', 'KonsultasiController::index');
-$routes->post('/konsultasi/processTambah', 'KonsultasiController::processTambah');
-$routes->post('/konsultasi/processEdit', 'KonsultasiController::processEdit');
+$routes->get('/konsultasi/detail/(:alphanum)', 'KonsultasiController::detailkonsultasi/$1');
+// $routes->post('/konsultasi/processTambah', 'KonsultasiController::processTambah');
+// $routes->post('/konsultasi/processEdit', 'KonsultasiController::processEdit');
 $routes->post('/konsultasi/delete', 'KonsultasiController::delete');
 
 

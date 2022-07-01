@@ -287,9 +287,12 @@ class HomeController extends BaseController
             $data['konsultasi'] = $this->konsultasi->getByNomorTiket($no_tiket);
             $id_penyakit = $data['konsultasi'][0]['id_penyakit'];
             $id_pasien = $data['konsultasi'][0]['id_pasien'];
+            $id_konsultasi = $data['konsultasi'][0]['id_konsultasi'];
 
             $data['penyakitAll'] = $this->penyakit->findAll();
             $data['penyakit'] = $this->penyakit->where('id_penyakit', $id_penyakit)->first();
+            $data['detail_konsultasi'] = $this->detail_konsultasi->getByIdKonsultasi($id_konsultasi);
+            $data['gejala'] = $this->gejala->findAll();
             $data['pasien'] = $this->pasien->where('id_pasien', $id_pasien)->first();
 
             return view('main/pengajuan/halamanHasilKonsultasi', $data);
@@ -306,9 +309,12 @@ class HomeController extends BaseController
             $data['konsultasi'] = $this->konsultasi->getByNomorTiket($no_tiket);
             $id_penyakit = $data['konsultasi'][0]['id_penyakit'];
             $id_pasien = $data['konsultasi'][0]['id_pasien'];
+            $id_konsultasi = $data['konsultasi'][0]['id_konsultasi'];
 
             $data['penyakitAll'] = $this->penyakit->findAll();
             $data['penyakit'] = $this->penyakit->where('id_penyakit', $id_penyakit)->first();
+            $data['detail_konsultasi'] = $this->detail_konsultasi->getByIdKonsultasi($id_konsultasi);
+            $data['gejala'] = $this->gejala->findAll();
             $data['pasien'] = $this->pasien->where('id_pasien', $id_pasien)->first();
 
             // session()->destroy();
@@ -448,13 +454,10 @@ class HomeController extends BaseController
         } else {
             $id_jadwal = session()->get('id_jadwal');
             $id_pasien = session()->get('id_pasien');
-            $data['pasien'] = $this->pasien
-                ->where('id_pasien', $id_pasien)
-                ->findAll();
-            $data['dokter'] = $this->dokter->findAll();
-            $data['jadwal'] = $this->jadwal
-                ->where('id_jadwal', $id_jadwal)
-                ->findAll();
+            $data['jadwal'] = $this->jadwal->getById($id_jadwal);
+            $data['pasien'] = $this->pasien->where('id_pasien', $id_pasien)->first();
+            $id_dokter = $data['jadwal'][0]['id_dokter'];
+            $data['dokter'] = $this->dokter->where('id_dokter', $id_dokter)->first();
             return view('main/janjitemu/halamanHasilJanjiTemu', $data);
         }
     }
@@ -467,13 +470,10 @@ class HomeController extends BaseController
         } else {
             $id_jadwal = session()->get('id_jadwal');
             $id_pasien = session()->get('id_pasien');
-            $data['pasien'] = $this->pasien
-                ->where('id_pasien', $id_pasien)
-                ->findAll();
-            $data['dokter'] = $this->dokter->findAll();
-            $data['jadwal'] = $this->jadwal
-                ->where('id_jadwal', $id_jadwal)
-                ->findAll();
+            $data['jadwal'] = $this->jadwal->getById($id_jadwal);
+            $data['pasien'] = $this->pasien->where('id_pasien', $id_pasien)->first();
+            $id_dokter = $data['jadwal'][0]['id_dokter'];
+            $data['dokter'] = $this->dokter->where('id_dokter', $id_dokter)->first();
 
             // session()->get('id_pasien')->destroy();
             return view('main/janjitemu/cetakHasilJanjiTemu', $data);

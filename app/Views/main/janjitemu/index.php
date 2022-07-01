@@ -65,23 +65,17 @@
 
     <!-- form cari nama dokter -->
     <form method="get" action="<?= base_url(); ?>/janjitemu">
-        <div class="row">
-            <div class="col">
-                <?php
-                $nama_dokter = "";
-                if (isset($_GET['nama_dokter'])) {
-                    $nama_dokter = $_GET['nama_dokter'];
-                }
-                ?>
-                <div class="form-group">
-                    <input class="form-control" type="text" id="nama_dokter" name="nama_dokter" placeholder="Cari Nama Dokter..." required autofocus value="<?= set_value('nama_dokter') ?>">
-                </div>
-            </div>
-            <div class="col">
-                <button type="submit" class="btn btn-circle" id="buttonCariUsernamePasien">
-                    <center><span data-feather="search"></span> Cari</center>
-                </button>
-            </div>
+        <div class="input-group mb-3">
+            <?php
+            $nama_dokter = "";
+            if (isset($_GET['nama_dokter'])) {
+                $nama_dokter = $_GET['nama_dokter'];
+            }
+            ?>
+            <input class="form-control" type="text" id="nama_dokter" name="nama_dokter" placeholder="Cari Nama Dokter..." required autofocus value="<?= set_value('nama_dokter') ?>">
+            <button type="submit" class="btn btn-circle" id="buttonCariNamaDokter">
+                <center><span data-feather="search"></span> Cari</center>
+            </button>
         </div>
     </form>
     <br>
@@ -143,7 +137,7 @@
                 <?php endif; ?>
 
                 <!-- form untuk update tabel jadwal jika ada yang membuat janji temu -->
-                <form method="post" id="formJadwal" action="<?= base_url(); ?>/janjitemu/process">
+                <form novalidate name="formJanjiTemu" id="formJanjiTemu" method="post" action="<?= base_url(); ?>/janjitemu/process">
                     <?= csrf_field() ?>
                     <div class="card align-self-center" id="cardKonsultasi">
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
@@ -166,7 +160,7 @@
                         ?>
                                     <div class="input-group mb-3" style="width:fit-content; position:relative;">
                                         <div class="input-group-text">
-                                            <input class="form-check-input mt-0" type="checkbox" id="checkboxJadwal" name="jadwal[]" value="<?php echo $row->id_jadwal ?>" autofocus>
+                                            <input class="form-check-input mt-0" type="checkbox" id="checkboxJadwal" name="jadwal[]" value="<?php echo $row->id_jadwal ?>" required autofocus>
                                         </div>
                                         <input type="text" class="form-control" value="<?php echo tgl_indo($row->tanggal_jadwal) ?>" style="width:35%;" readonly>
                                         <input type="text" class="form-control" value="<?php echo $row->waktu_jadwal ?>" style="text-align:center ;" readonly>
@@ -191,6 +185,9 @@
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" name="nama" id="nama" required autofocus value="<?= set_value('nama') ?>">
                                     <label>Masukan Nama Lengkap &nbsp;<b style="color: red; font-size:large;">*</b></label>
+                                    <div class="invalid-feedback">
+                                        Nama tidak boleh kosong.
+                                    </div>
                                 </div>
                                 <!-- <div class="form-floating mb-3">
                                     <input type="text" class="form-control" name="username_pasien" id="username_pasien" required autofocus value="<?= set_value('username_pasien') ?>" minlength="8" maxlength="10" title="Username harus 8-10 karakter dan mengandung minimal 1 angka." pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[a-zA-Z]).*$">
@@ -200,11 +197,17 @@
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" name="alamat" id="alamat" required autofocus value="<?= set_value('alamat') ?>">
                                     <label>Masukan Alamat &nbsp;<b style="color: red; font-size:large;">*</b></label>
+                                    <div class="invalid-feedback">
+                                        Alamat tidak boleh kosong.
+                                    </div>
                                 </div>
                                 <h6>Nomor Telepon</h6>
                                 <div class="form-floating mb-3">
-                                    <input type="number" class="form-control" name="no_telp" id="no_telp" required autofocus value="<?= set_value('no_telp') ?>" maxlength="13" onkeypress="return hanyaAngka(event)">
+                                    <input type="number" class="form-control" name="no_telp" id="no_telp" required autofocus value="<?= set_value('no_telp') ?>" min="1" maxlength="13" onkeypress="return hanyaAngka(event)">
                                     <label>Masukan Nomor Telepon &nbsp;<b style="color: red; font-size:large;">*</b></label>
+                                    <div class="invalid-feedback">
+                                        Nomor telepon tidak boleh kosong atau 0.
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -213,6 +216,9 @@
                                 <div class="form-floating mb-3">
                                     <input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir" required autofocus value="<?= set_value('tanggal_lahir') ?>">
                                     <label>Pilih Tanggal Lahir &nbsp;<b style="color: red; font-size:large;">*</b></label>
+                                    <div class="invalid-feedback">
+                                        Tanggal lahir tidak boleh kosong.
+                                    </div>
                                 </div>
                                 <h6>Jenis Kelamin</h6>
                                 <div class="form-floating mb-3">
@@ -228,11 +234,17 @@
                                                 } ?> value="<?php echo 'Laki-laki' ?>">Laki-laki</option>
                                     </select>
                                     <label>Pilih Jenis Kelamin &nbsp;<b style="color: red; font-size:large;">*</b></label>
+                                    <div class="invalid-feedback">
+                                        Jenis kelamin tidak boleh kosong.
+                                    </div>
                                 </div>
                                 <h6>Umur</h6>
                                 <div class="form-floating mb-3">
                                     <input type="number" class="form-control" name="umur" id="umur" required autofocus value="<?= set_value('umur') ?>" onkeypress="return hanyaAngka(event)" min="1">
                                     <label>Masukan Umur &nbsp;<b style="color: red; font-size:large;">*</b></label>
+                                    <div class="invalid-feedback">
+                                        Umur tidak boleh kosong atau 0.
+                                    </div>
                                 </div>
                                 <br>
                             </div>

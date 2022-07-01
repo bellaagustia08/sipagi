@@ -141,29 +141,21 @@
             background-color: #FFD365;
         }
 
-        #buttonCetakHasilKonsultasi {
-            position: absolute;
-            width: fit-content;
-            background-color: #827397;
-            color: white;
-            font-size: 16px;
-            box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
-            border-radius: 3px;
-        }
-
+        #buttonCetakHasilKonsultasi,
         #buttonDownloadHasil {
             position: absolute;
             width: fit-content;
-            background-color: #FFD365;
+            background-color: #54BAB9;
             color: black;
             font-size: 16px;
             box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
-            border: 2px solid #827397;
+            border: 1px solid black;
             border-radius: 3px;
         }
 
         #buttonCariTiket,
         #buttonCariUsernamePasien,
+        #buttonCariNamaDokter,
         #buttonCariRiwayat {
             position: relative;
             padding: 6px 15px;
@@ -239,6 +231,38 @@
                 // Call Modal Edit
                 $('#detailModal').modal('show');
             });
+
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function() {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('#formDataDiri')
+                var forms_janji_temu = document.querySelectorAll('#formJanjiTemu')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms).forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+
+                Array.prototype.slice.call(forms_janji_temu).forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+            })()
         });
 
         feather.replace()
@@ -284,7 +308,7 @@
             // alert("Copied the text: " + copyText.value);
             Swal.fire({ //displays a pop up with sweetalert
                 icon: 'success',
-                title: 'No. Tiket berhasil di salin',
+                title: 'No. Tiket Berhasil Disalin',
                 showConfirmButton: false,
                 timer: 1000
             });
@@ -306,7 +330,7 @@
             // alert("Copied the text: " + copyText.value);
             Swal.fire({ //displays a pop up with sweetalert
                 icon: 'success',
-                title: 'Username berhasil di salin',
+                title: 'Nama Unik Berhasil Disalin',
                 showConfirmButton: false,
                 timer: 1000
             });

@@ -72,24 +72,17 @@
     <h2> Lihat Riwayat Konsultasi </h2>
     <br>
     <form method="get" action="<?= base_url(); ?>/riwayat">
-        <div class="row">
-            <div class="col">
-                <?php
-                $username_pasien = "";
-                if (isset($_GET['username_pasien'])) {
-                    $username_pasien = $_GET['username_pasien'];
-                }
-                ?>
-                <div class="form-group">
-                    <input class="form-control" type="text" id="username_pasien" name="username_pasien" placeholder="Username Pasien..." required autofocus value="<?php echo $username_pasien ?>">
-                </div>
-            </div>
-
-            <div class="col">
-                <button type="submit" class="btn btn-circle" id="buttonCariRiwayat">
-                    <center><span data-feather="search"></span> Cari</center>
-                </button>
-            </div>
+        <div class="input-group mb-3">
+            <?php
+            $username_pasien = "";
+            if (isset($_GET['username_pasien'])) {
+                $username_pasien = $_GET['username_pasien'];
+            }
+            ?>
+            <input class="form-control" type="text" id="username_pasien" name="username_pasien" placeholder="Masukan Nama Unik Pasien..." required autofocus value="<?php echo $username_pasien ?>">
+            <button type="submit" class="btn btn-circle" id="buttonCariUsernamePasien">
+                <center><span data-feather="search"></span> Cari</center>
+            </button>
         </div>
     </form>
     <br><br>
@@ -112,7 +105,7 @@
             $sql = null;
     ?>
             <center>
-                <h4>Username Tidak Ditemukan</h4>
+                <h4>Nama Unik Tidak Ditemukan</h4>
             </center>
         <?php
         }
@@ -150,40 +143,38 @@
                             if ($tempData['id_pasien'] == $rowpasien->id_pasien) {
                         ?>
                                 <tr>
-                                    <td style="width: 8%;">Nama</td>
-                                    <td style="width: 4%;" align="center">:</td>
-                                    <td>
-                                        <?php echo $rowpasien->nama_pasien; ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 8%;">Username</td>
-                                    <td style="width: 4%;" align="center">:</td>
+                                    <td style="width: 105px;">Nama Unik</td>
+                                    <td style="width: 25px;" align="center">:</td>
                                     <td><?php echo $rowpasien->username_pasien ?></td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 8%;">Alamat</td>
-                                    <td style="width: 4%;" align="center">:</td>
+                                    <td style="width: 105px;">Nama Lengkap</td>
+                                    <td style="width: 25px;" align="center">:</td>
+                                    <td><?php echo $rowpasien->nama_pasien; ?></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 105px;">Alamat</td>
+                                    <td style="width: 25px;" align="center">:</td>
                                     <td><?php echo $rowpasien->alamat_pasien ?></td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 8%;">No. Telepon</td>
-                                    <td style="width: 4%;" align="center">:</td>
+                                    <td style="width: 105px;">No. Telepon</td>
+                                    <td style="width: 25px;" align="center">:</td>
                                     <td><?php echo $rowpasien->no_telp_pasien ?></td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 8%;">Jenis Kelamin</td>
-                                    <td style="width: 4%;" align="center">:</td>
+                                    <td style="width: 105px;">Jenis Kelamin</td>
+                                    <td style="width: 25px;" align="center">:</td>
                                     <td><?php echo $rowpasien->jenis_kelamin_pasien ?></td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 8%;">Tanggal Lahir</td>
-                                    <td style="width: 4%;" align="center">:</td>
+                                    <td style="width: 105px;">Tanggal Lahir</td>
+                                    <td style="width: 25px;" align="center">:</td>
                                     <td><?php echo tgl_indo($rowpasien->tanggal_lahir_pasien) ?></td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 8%;">Umur</td>
-                                    <td style="width: 4%;" align="center">:</td>
+                                    <td style="width: 105px;">Umur</td>
+                                    <td style="width: 25px;" align="center">:</td>
                                     <td><?php echo $rowpasien->umur_pasien ?></td>
                                 </tr>
                         <?php
@@ -193,7 +184,7 @@
 
                     </tbody>
                 </table>
-            </div>
+            </div> <br>
 
             <center>
                 <h4>Daftar Riwayat Konsultasi</h4>

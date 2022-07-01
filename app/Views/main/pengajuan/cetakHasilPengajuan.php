@@ -62,45 +62,71 @@
         <table>
             <tbody>
                 <tr>
-                    <td style="width: 150px;">Username Pasien</td>
-                    <td style="width: 25px;">:</td>
-                    <td> <?php echo $_SESSION['username_pasien']; ?> </td>
+                    <td style="width: 105px;">Nama Unik</td>
+                    <td style="width: 25px;" align="center">:</td>
+                    <td><?php echo $pasien->username_pasien ?></td>
                 </tr>
                 <tr>
-                    <td>Nama</td>
-                    <td>:</td>
-                    <td> <?php echo $pasien->nama_pasien; ?> </td>
+                    <td style="width: 105px;">Nama Lengkap</td>
+                    <td style="width: 25px;" align="center">:</td>
+                    <td><?php echo $pasien->nama_pasien; ?></td>
                 </tr>
                 <tr>
-                    <td>Alamat</td>
-                    <td>:</td>
-                    <td> <?php echo $pasien->alamat_pasien; ?> </td>
+                    <td style="width: 105px;">Alamat</td>
+                    <td style="width: 25px;" align="center">:</td>
+                    <td><?php echo $pasien->alamat_pasien ?></td>
                 </tr>
                 <tr>
-                    <td>No. Telepon</td>
-                    <td>:</td>
-                    <td> <?php echo $pasien->no_telp_pasien; ?> </td>
+                    <td style="width: 105px;">No. Telepon</td>
+                    <td style="width: 25px;" align="center">:</td>
+                    <td><?php echo $pasien->no_telp_pasien ?></td>
                 </tr>
                 <tr>
-                    <td>Jenis Kelamin</td>
-                    <td>:</td>
-                    <td> <?php echo $pasien->jenis_kelamin_pasien; ?> </td>
+                    <td style="width: 105px;">Jenis Kelamin</td>
+                    <td style="width: 25px;" align="center">:</td>
+                    <td><?php echo $pasien->jenis_kelamin_pasien ?></td>
                 </tr>
                 <tr>
-                    <td>Tanggal Lahir</td>
-                    <td>:</td>
-                    <td> <?php echo $pasien->tanggal_lahir_pasien; ?> </td>
+                    <td style="width: 105px;">Tanggal Lahir</td>
+                    <td style="width: 25px;" align="center">:</td>
+                    <td><?php echo tgl_indo($pasien->tanggal_lahir_pasien) ?></td>
                 </tr>
                 <tr>
-                    <td>Umur</td>
-                    <td>:</td>
-                    <td> <?php echo $pasien->umur_pasien; ?> </td>
+                    <td style="width: 105px;">Umur</td>
+                    <td style="width: 25px;" align="center">:</td>
+                    <td><?php echo $pasien->umur_pasien ?></td>
                 </tr>
             </tbody>
         </table>
     </div>
 
     <div class="card" id="cardHasilKonsultasi_hasildiagnosa">
+        <h6>Gejala yang Dialami : </h6>
+        <?php
+        foreach ($detail_konsultasi as $row) {
+            $hitung = 0;
+            foreach ($gejala as $rowgejala) {
+                if ($row['id_gejala'] == $rowgejala->id_gejala && $row['cf_user'] == 0.2) {
+                    echo $rowgejala->nama_gejala . ' [ Tingkat Keyakinan : Tidak Tahu ]';
+                    echo '<br>';
+                } else if ($row['id_gejala'] == $rowgejala->id_gejala && $row['cf_user'] == 0.4) {
+                    echo $rowgejala->nama_gejala . ' [ Tingkat Keyakinan : Sedikit Yakin ]';
+                    echo '<br>';
+                } else if ($row['id_gejala'] == $rowgejala->id_gejala && $row['cf_user'] == 0.6) {
+                    echo $rowgejala->nama_gejala . ' [ Tingkat Keyakinan : Cukup Yakin ]';
+                    echo '<br>';
+                } else if ($row['id_gejala'] == $rowgejala->id_gejala && $row['cf_user'] == 0.8) {
+                    echo $rowgejala->nama_gejala . ' [ Tingkat Keyakinan : Yakin ]';
+                    echo '<br>';
+                } else if ($row['id_gejala'] == $rowgejala->id_gejala && $row['cf_user'] == 0.1) {
+                    echo $rowgejala->nama_gejala . ' [ Tingkat Keyakinan : Sangat Yakin ]';
+                    echo '<br>';
+                }
+            }
+        }
+        ?>
+        <br>
+
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
             <h4>Hasil Diagnosa</h4>
         </div>

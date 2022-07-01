@@ -65,113 +65,57 @@
             <h4>Data Pasien</h4>
         </div>
         <br>
-        <?php
-        foreach ($jadwal as $row) {
-        ?>
-            <table>
-                <tbody>
-                    <?php
-                    foreach ($pasien as $rowpasien) {
-                        if ($row->id_pasien == $rowpasien->id_pasien) {
-                    ?>
-                            <tr>
-                                <td style="width: 125px;">Nama</td>
-                                <td style="width: 25px;">:</td>
-                                <td>
-                                    <?php
-                                    echo $rowpasien->nama_pasien;
-                                    ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Alamat</td>
-                                <td>:</td>
-                                <td>
-                                    <?php
-                                    echo $rowpasien->alamat_pasien;
-                                    ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>No. Telepon</td>
-                                <td>:</td>
-                                <td>
-                                    <?php
-                                    echo $rowpasien->no_telp_pasien;
-                                    ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Jenis Kelamin</td>
-                                <td>:</td>
-                                <td>
-                                    <?php
-                                    echo $rowpasien->jenis_kelamin_pasien;
-                                    ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Tanggal Lahir</td>
-                                <td>:</td>
-                                <td>
-                                    <?php
-                                    echo tgl_indo($rowpasien->tanggal_lahir_pasien);
-                                    ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Umur</td>
-                                <td>:</td>
-                                <td>
-                                    <?php
-                                    echo $rowpasien->umur_pasien;
-                                    ?>
-                                </td>
-                            </tr>
-                    <?php
-                        }
-                    }
-                    ?>
-
-                </tbody>
-            </table>
-            <br>
-        <?php
-
-        }
-        ?>
+        <table>
+            <tbody>
+                <tr>
+                    <td style="width: 105px;">Nama Lengkap</td>
+                    <td style="width: 25px;" align="center">:</td>
+                    <td><?php echo $pasien->nama_pasien; ?></td>
+                </tr>
+                <tr>
+                    <td style="width: 105px;">Alamat</td>
+                    <td style="width: 25px;" align="center">:</td>
+                    <td><?php echo $pasien->alamat_pasien ?></td>
+                </tr>
+                <tr>
+                    <td style="width: 105px;">No. Telepon</td>
+                    <td style="width: 25px;" align="center">:</td>
+                    <td><?php echo $pasien->no_telp_pasien ?></td>
+                </tr>
+                <tr>
+                    <td style="width: 105px;">Jenis Kelamin</td>
+                    <td style="width: 25px;" align="center">:</td>
+                    <td><?php echo $pasien->jenis_kelamin_pasien ?></td>
+                </tr>
+                <tr>
+                    <td style="width: 105px;">Tanggal Lahir</td>
+                    <td style="width: 25px;" align="center">:</td>
+                    <td><?php echo tgl_indo($pasien->tanggal_lahir_pasien) ?></td>
+                </tr>
+                <tr>
+                    <td style="width: 105px;">Umur</td>
+                    <td style="width: 25px;" align="center">:</td>
+                    <td><?php echo $pasien->umur_pasien ?></td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
 
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
             <h4>Janji Temu</h4>
         </div>
-        <?php
-        foreach ($jadwal as $row) {
-            foreach ($pasien as $rowpasien) {
-                if ($row->id_pasien == $rowpasien->id_pasien) {
-        ?>
-                    <p>
-                        Janji Temu anda dengan dokter
-                        <?php
-                        foreach ($dokter as $rowdokter) {
-                            if ($rowdokter->id_dokter == $row->id_dokter) {
-                                echo $rowdokter->nama_dokter;
-                            }
-                        }
-                        ?> pada tanggal
-                        <?php
-                        echo tgl_indo($row->tanggal_jadwal);
-                        ?>
-                        pukul
-                        <?php
-                        $t = strtotime($row->waktu_jadwal);
-                        echo date("H:i", $t);
-                        ?>
-                    </p>
-        <?php
-                }
-            }
-        }
-        ?>
+        <br>
+        <p>
+            Janji Temu anda dengan dokter
+            <?php echo $dokter->nama_dokter; ?>
+            pada tanggal
+            <?php echo tgl_indo($jadwal[0]['tanggal_jadwal']); ?>
+            pukul
+            <?php
+            $t = strtotime($jadwal[0]['waktu_jadwal']);
+            echo date("H:i", $t);
+            ?>
+        </p>
     </div>
     <br>
 </div>

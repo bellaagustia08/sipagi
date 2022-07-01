@@ -77,9 +77,9 @@
 <div class="container">
     <div class="card" id="cardPerhatian">
         <h6>Perhatian!</h6>
-        Dimohon Untuk Mengisi Data Dengan Valid.
-        <br>
         Jika Anda Pasien Baru di SiPaGi, Masukan "-"
+        <br>
+        Dimohon Untuk Mengisi Data Dengan Valid.
     </div>
     <br>
 
@@ -88,23 +88,11 @@
 
     <!-- form cari -->
     <form method="get" action="<?= base_url(); ?>/pengajuan">
-        <div class="row">
-            <div class="col">
-                <?php
-                $username_pasien_cari = "";
-                if (isset($_GET['username_pasien_cari'])) {
-                    $username_pasien_cari = $_GET['username_pasien_cari'];
-                }
-                ?>
-                <div class="form-group">
-                    <input class="form-control" type="text" id="username_pasien_cari" name="username_pasien_cari" placeholder="Username Pasien..." required autofocus value="<?= set_value('username_pasien_cari') ?>">
-                </div>
-            </div>
-            <div class="col">
-                <button type="submit" class="btn btn-circle" id="buttonCariUsernamePasien">
-                    <center><span data-feather="search"></span> Cari</center>
-                </button>
-            </div>
+        <div class="input-group mb-3">
+            <input class="form-control" type="text" id="username_pasien_cari" name="username_pasien_cari" placeholder="Masukan Nama Unik Pasien..." required autofocus value="<?= set_value('username_pasien_cari') ?>">
+            <button type="submit" class="btn btn-circle" id="buttonCariUsernamePasien">
+                <center><span data-feather="search"></span> Cari</center>
+            </button>
         </div>
     </form>
     <br><br>
@@ -137,13 +125,12 @@
                 <h4>Pendaftaran Pasien Baru</h4>
             </center> <br>
             <h6 style="color: red;">Silahkan isi data diri di bawah ini.</h6>
-
             <!-- form konsultasi -->
-            <form name="formDataDiri" method="post" action="<?= base_url(); ?>/pengajuan/process" onsubmit="return validateForm()">
+            <form novalidate name="formDataDiri" id="formDataDiri" method="post" action="<?= base_url(); ?>/pengajuan/process" onsubmit="return validateForm()">
                 <?= csrf_field() ?>
                 <div class="card" id="cardDataDiri">
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
-                        <h3>Form Data Diri Pasien</h3>
+                        <h4>Form Data Diri Pasien</h4>
                     </div>
                     <br>
                     <div class="form-group">
@@ -155,27 +142,41 @@
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" name="nama" id="nama" required autofocus value="<?= set_value('nama'); ?>">
                         <label>Masukan Nama Lengkap &nbsp;<b style="color: red; font-size:large;">*</b></label>
+                        <div class="invalid-feedback">
+                            Nama tidak boleh kosong.
+                        </div>
                     </div>
-                    <h6>Username</h6>
+                    <h6>Nama Unik Pasien</h6>
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" name="username_pasien" id="username_pasien" required autofocus value="<?= set_value('username_pasien'); ?>" minlength="8" maxlength="10" title="Username harus 8-10 karakter dan mengandung minimal 1 angka." pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[a-zA-Z]).*$">
-                        <label>Masukan Username &nbsp;<b style="color: red; font-size:large;">*</b></label>
-                        <p style="color: red; font-size:small;">Username harus 8-10 karakter dan mengandung minimal 1 angka.</p>
+                        <label>Masukan Nama Unik &nbsp;<b style="color: red; font-size:large;">*</b></label>
+                        <div class="invalid-feedback">
+                            Nama unik harus terdiri dari 8-10 karakter dan mengandung huruf dan minimal 1 angka.
+                        </div>
                     </div>
                     <h6>Alamat</h6>
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" name="alamat" id="alamat" required autofocus value="<?= set_value('alamat'); ?>">
                         <label>Masukan Alamat &nbsp;<b style="color: red; font-size:large;">*</b></label>
+                        <div class="invalid-feedback">
+                            Alamat tidak boleh kosong.
+                        </div>
                     </div>
                     <h6>Nomor Telepon</h6>
                     <div class="form-floating mb-3">
                         <input type="number" class="form-control" name="no_telp" id="no_telp" required autofocus value="<?= set_value('no_telp') ?>" min="1" maxlength="13" onkeypress="return hanyaAngka(event)">
                         <label>Masukan Nomor Telepon &nbsp;<b style="color: red; font-size:large;">*</b></label>
+                        <div class="invalid-feedback">
+                            Nomor telepon tidak boleh kosong atau 0.
+                        </div>
                     </div>
                     <h6>Tanggal Lahir</h6>
                     <div class="form-floating mb-3">
                         <input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir" required autofocus value="<?= set_value('tanggal_lahir') ?>">
                         <label>Pilih Tanggal Lahir &nbsp;<b style="color: red; font-size:large;">*</b></label>
+                        <div class="invalid-feedback">
+                            Tanggal lahir tidak boleh kosong.
+                        </div>
                     </div>
                     <h6>Jenis Kelamin</h6>
                     <div class="form-floating mb-3">
@@ -191,23 +192,28 @@
                                     } ?> value="<?php echo 'Laki-laki' ?>">Laki-laki</option>
                         </select>
                         <label>Pilih Jenis Kelamin &nbsp;<b style="color: red; font-size:large;">*</b></label>
+                        <div class="invalid-feedback">
+                            Jenis kelamin tidak boleh kosong.
+                        </div>
                     </div>
                     <h6>Umur</h6>
                     <div class="form-floating mb-3">
                         <input type="number" class="form-control" name="umur" id="umur" required autofocus value="<?= set_value('umur') ?>" onkeypress="return hanyaAngka(event)" min="1">
                         <label>Masukan Umur &nbsp;<b style="color: red; font-size:large;">*</b></label>
+                        <div class="invalid-feedback">
+                            Umur tidak boleh kosong atau 0.
+                        </div>
                     </div>
                     <br>
                 </div>
                 <br><br>
 
-                <h6 style="color: red;">Silahkan isi form gejala dan isi sesuai gejala yang anda alami.</h6>
+                <h6 style="color: red;">Silahkan isi form gejala dan isi sesuai gejala yang anda alami saja.</h6>
                 <div class="card align-self-center" id="cardKonsultasi">
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
-                        <h3>Form Gejala</h3>
+                        <h4>Form Gejala</h4>
                     </div>
                     <br>
-
                     <table id="table-datatable" class="table table-hover row-border">
                         <thead>
                             <tr>
@@ -247,14 +253,14 @@
                         </tbody>
                     </table>
                     <br>
+                </div><br>
 
-                    <div class="form-group">
-                        <center>
-                            <button type="submit" class="btn btn-circle" id="buttonSimpanPengajuanKonsultasi">Proses Data Konsultasi</button>
-                        </center>
-                    </div>
-                    <br>
+                <div class="form-group">
+                    <center>
+                        <button type="submit" class="btn btn-circle" id="buttonSimpanPengajuanKonsultasi">Proses Data Konsultasi</button>
+                    </center>
                 </div>
+                <br>
             </form>
         <?php
         } else {
@@ -272,40 +278,38 @@
                             if ($data['username_pasien'] == $rowpasien->username_pasien) {
                         ?>
                                 <tr>
-                                    <td style="width: 8%;">Nama</td>
-                                    <td style="width: 4%;" align="center">:</td>
-                                    <td>
-                                        <?php echo $rowpasien->nama_pasien; ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 8%;">Username</td>
-                                    <td style="width: 4%;" align="center">:</td>
+                                    <td style="width: 105px;">Nama Unik</td>
+                                    <td style="width: 25px;" align="center">:</td>
                                     <td><?php echo $rowpasien->username_pasien ?></td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 8%;">Alamat</td>
-                                    <td style="width: 4%;" align="center">:</td>
+                                    <td style="width: 105px;">Nama Lengkap</td>
+                                    <td style="width: 25px;" align="center">:</td>
+                                    <td><?php echo $rowpasien->nama_pasien; ?></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 105px;">Alamat</td>
+                                    <td style="width: 25px;" align="center">:</td>
                                     <td><?php echo $rowpasien->alamat_pasien ?></td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 8%;">No. Telepon</td>
-                                    <td style="width: 4%;" align="center">:</td>
+                                    <td style="width: 105px;">No. Telepon</td>
+                                    <td style="width: 25px;" align="center">:</td>
                                     <td><?php echo $rowpasien->no_telp_pasien ?></td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 8%;">Jenis Kelamin</td>
-                                    <td style="width: 4%;" align="center">:</td>
+                                    <td style="width: 105px;">Jenis Kelamin</td>
+                                    <td style="width: 25px;" align="center">:</td>
                                     <td><?php echo $rowpasien->jenis_kelamin_pasien ?></td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 8%;">Tanggal Lahir</td>
-                                    <td style="width: 4%;" align="center">:</td>
+                                    <td style="width: 105px;">Tanggal Lahir</td>
+                                    <td style="width: 25px;" align="center">:</td>
                                     <td><?php echo tgl_indo($rowpasien->tanggal_lahir_pasien) ?></td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 8%;">Umur</td>
-                                    <td style="width: 4%;" align="center">:</td>
+                                    <td style="width: 105px;">Umur</td>
+                                    <td style="width: 25px;" align="center">:</td>
                                     <td><?php echo $rowpasien->umur_pasien ?></td>
                                 </tr>
                         <?php
@@ -319,7 +323,6 @@
             <br>
 
 
-            <h6 style="color: red;">Silahkan isi form gejala dan isi sesuai gejala yang anda alami.</h6>
             <!-- form konsultasi -->
             <form method="post" action="<?= base_url(); ?>/pengajuan/process">
                 <?= csrf_field() ?>
@@ -344,9 +347,10 @@
                     <br>
                 </div>
 
+                <h6 style="color: red;">Silahkan isi form gejala dan isi sesuai gejala yang anda alami saja.</h6>
                 <div class="card align-self-center" id="cardKonsultasi">
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
-                        <h3>Form Gejala</h3>
+                        <h4>Form Gejala</h4>
                     </div>
                     <br>
                     <table id="table-datatable" class="table table-hover row-border">
@@ -387,15 +391,15 @@
                             <?php } ?>
                         </tbody>
                     </table>
+                    <br>
+                </div><br>
 
-                    <br>
-                    <div class="form-group">
-                        <center>
-                            <button type="submit" class="btn btn-circle" id="buttonSimpanPengajuanKonsultasi">Proses Data Konsultasi</button>
-                        </center>
-                    </div>
-                    <br>
+                <div class="form-group">
+                    <center>
+                        <button type="submit" class="btn btn-circle" id="buttonSimpanPengajuanKonsultasi">Proses Data Konsultasi</button>
+                    </center>
                 </div>
+                <br>
             </form>
         <?php
         }

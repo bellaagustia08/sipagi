@@ -23,9 +23,11 @@
             <h4>Detail Riwayat</h4>
             <div class="row">
                 <div class="col float-end">
-                    <b>No. Tiket Konsultasi :</b>
-                    <input id="copyText" type="text" value="<?php echo $konsultasi->no_tiket; ?>" readonly style="width:100px; text-align:center;">
-                    <button id="copyBtn" onclick="fungsiSalinNoTiket()"><span data-feather="copy"></span> Salin </button>
+                    <div class="input-group mb-3">
+                        <b>No. Tiket Konsultasi : </b> &nbsp;
+                        <input id="copyText" type="text" value="<?php echo $konsultasi->no_tiket; ?>" readonly style="width:100px; text-align:center;">
+                        <button id="copyBtn" onclick="fungsiSalinNoTiket()"><span data-feather="copy"></span> Salin </button>
+                    </div>
                 </div>
             </div>
         </div>

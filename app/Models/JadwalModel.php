@@ -35,4 +35,11 @@ class JadwalModel extends Model
         $this->db->table($this->table)->where('id_jadwal', $id);
         return $this->db->table($this->table)->delete($id);
     }
+
+    public function getById($id)
+    {
+        return $this->db->table($this->table)
+            ->where('id_jadwal', $id)
+            ->get()->getResultArray();
+    }
 }

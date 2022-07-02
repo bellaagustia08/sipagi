@@ -155,8 +155,8 @@
                 <h5 style="color: red;">Apakah anda yakin ingin menghapus data tersebut?</h5>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tidak</button>
-                <button type="submit" class="btn btn-primary">Ya</button>
+                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Tidak</button>
+                <button type="submit" class="btn btn-danger">Ya</button>
             </div>
         </div>
     </div>

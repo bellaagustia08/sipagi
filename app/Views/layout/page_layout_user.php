@@ -198,7 +198,7 @@
         }
 
         .modal {
-            top: 5%;
+            top: 2%;
         }
 
         .modal#tambahModalPenyakit,
@@ -239,6 +239,16 @@
                 $(this).remove();
             });
         }, 1200);
+
+        // auto hitung umur
+        window.onload = function() {
+            $('#tanggal_lahir_pasien').on('change', function() {
+                var dob = new Date(this.value);
+                var today = new Date();
+                var age = Math.floor((today - dob) / (365.25 * 24 * 60 * 60 * 1000));
+                $('#umur_pasien').val(age);
+            });
+        }
 
         // fungsi untuk input nomor telepon hanya angka saja 
         function hanyaAngka(event) {
@@ -330,7 +340,87 @@
             }
         }
 
+
         $(document).ready(function() {
+            (function() {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var formsTambahPasien = document.querySelectorAll('#formTambahPasien')
+                var formsUbahPasien = document.querySelectorAll('#formUbahPasien')
+                var formsTambahDokter = document.querySelectorAll('#formTambahDokter')
+                var formsUbahDokter = document.querySelectorAll('#formUbahDokter')
+                var formsTambahJadwal = document.querySelectorAll('#formTambahJadwal')
+                var formsUbahJadwal = document.querySelectorAll('#formUbahJadwal')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(formsTambahPasien).forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+
+                Array.prototype.slice.call(formsUbahPasien).forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+
+                Array.prototype.slice.call(formsTambahDokter).forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+
+                Array.prototype.slice.call(formsUbahDokter).forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+
+                Array.prototype.slice.call(formsTambahJadwal).forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+
+                Array.prototype.slice.call(formsUbahDokter).forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+            })()
+
             // show hide password 
             $("#sandi_lama a").on('click', function(event) {
                 event.preventDefault();

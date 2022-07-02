@@ -101,7 +101,7 @@
 </table>
 
 <!-- Modal Tambah Jadwal -->
-<?= form_open_multipart(base_url('jadwal/processTambah')); ?>
+<?= form_open_multipart(base_url('jadwal/processTambah'), 'id="formTambahJadwal", novalidate'); ?>
 <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -113,11 +113,17 @@
                 <div class="form-group">
                     <label>Tanggal Jadwal</label>
                     <input type="text" class="form-control" name="tanggal_jadwal" id="tanggal_jadwal" required placeholder="Pilih Tanggal">
+                    <div class="invalid-feedback">
+                        Tanggal jadwal tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
                     <label>Waktu</label>
                     <input type="time" class="form-control" name="waktu_jadwal" id="waktu_jadwal" required placeholder="Pilih Waktu">
+                    <div class="invalid-feedback">
+                        Waktu tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
@@ -128,6 +134,9 @@
                             <option value="<?php echo $row['id_dokter'] ?>---<?php echo $row['nama_dokter']; ?>"><?php echo $row['nama_dokter']; ?></option>
                         <?php endforeach; ?>
                     </select>
+                    <div class="invalid-feedback">
+                        Pilih salah satu dokter, tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
@@ -147,7 +156,7 @@
 <?= form_close() ?>
 
 <!-- Modal Ubah Jadwal-->
-<?= form_open_multipart(base_url('jadwal/processEdit')); ?>
+<?= form_open_multipart(base_url('jadwal/processEdit'), 'id="formUbahJadwal", novalidate'); ?>
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -163,11 +172,17 @@
                 <div class="form-group">
                     <label>Tanggal Jadwal</label>
                     <input type="text" class="form-control tanggal_jadwal" name="tanggal_jadwal" id="tanggal_jadwal_edit" required>
+                    <div class="invalid-feedback">
+                        Tanggal jadwal tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
                     <label>Waktu</label>
                     <input type="time" class="form-control waktu_jadwal" name="waktu_jadwal" id="waktu_jadwal">
+                    <div class="invalid-feedback">
+                        Waktu tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
@@ -180,6 +195,9 @@
                                     } ?> value="<?php echo $row['id_dokter']; ?>"><?php echo $row['nama_dokter']; ?></option>
                         <?php endforeach; ?>
                     </select>
+                    <div class="invalid-feedback">
+                        Pilih salah satu dokter, tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">

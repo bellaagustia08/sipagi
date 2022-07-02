@@ -35,7 +35,7 @@ class PasienController extends BaseController
     {
         //ambil data dari masukan
         $nama_pasien = ucwords($this->request->getPost('nama_pasien'));
-        $username_pasien = ucwords($this->request->getPost('username_pasien'));
+        $username_pasien = $this->request->getPost('username_pasien');
         $alamat_pasien = ucwords($this->request->getPost('alamat_pasien'));
         $no_telp_pasien = $this->request->getPost('no_telp_pasien');
         $tanggal_lahir_pasien = $this->request->getPost('tanggal_lahir_pasien');
@@ -70,7 +70,7 @@ class PasienController extends BaseController
         //ambil data dari masukan
         $id_pasien = $this->request->getPost('id_pasien');
         $nama_pasien = ucwords($this->request->getPost('nama_pasien'));
-        $username_pasien = ucwords($this->request->getPost('username_pasien'));
+        $username_pasien = $this->request->getPost('username_pasien');
         $alamat_pasien = ucwords($this->request->getPost('alamat_pasien'));
         $no_telp_pasien = $this->request->getPost('no_telp_pasien');
         $tanggal_lahir_pasien = $this->request->getPost('tanggal_lahir_pasien');

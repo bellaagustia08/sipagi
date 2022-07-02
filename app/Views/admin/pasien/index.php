@@ -74,7 +74,7 @@
 
 
 <!-- Modal Tambah Pasien -->
-<?= form_open_multipart(base_url('pasien/processTambah')); ?>
+<?= form_open_multipart(base_url('pasien/processTambah'), 'id="formTambahPasien", novalidate'); ?>
 <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -85,41 +85,62 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label>Nama Lengkap</label>
-                    <input type="text" class="form-control" name="nama_pasien" placeholder="Masukan Nama Lengkap" required autofocus>
+                    <input type="text" class="form-control" name="nama_pasien" placeholder="Masukan Nama Lengkap" required autofocus value="<?= set_value('nama_pasien') ?>">
+                    <div class="invalid-feedback">
+                        Nama lengkap tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
-                    <label>Nama Pengguna</label>
-                    <input type="text" class="form-control" name="username_pasien" placeholder="Masukan Nama Pengguna" required autofocus value="<?= set_value('username_pasien') ?>" minlength="8" maxlength="10" title="Username harus 8-10 karakter dan mengandung minimal 1 angka." pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[a-zA-Z]).*$">
+                    <label>Nama Unik</label>
+                    <input type="text" class="form-control" name="username_pasien" placeholder="Masukan Nama Unik" required autofocus value="<?= set_value('username_pasien') ?>" minlength="8" maxlength="10" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[a-zA-Z]).*$">
+                    <div class="invalid-feedback">
+                        Nama unik harus 8-10 karakter, mengandung huruf dan minimal 1 angka.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
                     <label>Alamat</label>
                     <textarea type="text" class="form-control" name="alamat_pasien" placeholder="Masukan Alamat" rows="7" required autofocus value="<?= set_value('alamat_pasien') ?>"></textarea>
+                    <div class="invalid-feedback">
+                        Alamat tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
                     <label>Nomor Telepon</label>
-                    <input type="text" class="form-control" name="no_telp_pasien" placeholder="Masukan Nomor Telepon" maxlength="13" required autofocus onkeypress="return hanyaAngka(event)" value="<?= set_value('no_telp_pasien') ?>">
+                    <input type="number" class="form-control" name="no_telp_pasien" placeholder="Masukan Nomor Telepon" min="1" maxlength="13" required autofocus onkeypress="return hanyaAngka(event)" value="<?= set_value('no_telp_pasien') ?>">
+                    <div class="invalid-feedback">
+                        Nomor telepon tidak boleh kosong dan 0.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
                     <label>Tanggal Lahir</label>
                     <input type="date" class="form-control" name="tanggal_lahir_pasien" id="tanggal_lahir_pasien" placeholder="Pilih Tanggal Lahir" required autofocus value="<?= set_value('tanggal_lahir_pasien') ?>">
+                    <div class="invalid-feedback">
+                        Tanggal lahir tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
-                    <label>Masukan Umur</label>
-                    <input type="number" class="form-control" name="umur_pasien" id="umur_pasien" required autofocus value="<?= set_value('umur_pasien') ?>">
+                    <label>Umur</label>
+                    <input type="number" class="form-control" name="umur_pasien" id="umur_pasien" placeholder="Masukan Umur" min="1" required autofocus value="<?= set_value('umur_pasien') ?>">
+                    <div class="invalid-feedback">
+                        Umur tidak boleh kosong dan 0.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
-                    <label>Pilih Jenis Kelamin</label>
+                    <label>Jenis Kelamin</label>
                     <select name="jenis_kelamin_pasien" id="jenis_kelamin_pasien" class="selectpicker form-control" data-live-search="true" required autofocus value="<?= set_value('jenis_kelamin_pasien') ?>">
                         <option value="<?php echo '' ?>" selected>Pilih Jenis Kelamin</option>
                         <option value="<?php echo 'Perempuan' ?>">Perempuan</option>
                         <option value="<?php echo 'Laki-laki' ?>">Laki-laki</option>
                     </select>
+                    <div class="invalid-feedback">
+                        Jenis kelamin tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
             </div>
@@ -133,7 +154,7 @@
 <?= form_close() ?>
 
 <!-- Modal Ubah Pasien-->
-<?= form_open_multipart(base_url('pasien/processEdit')); ?>
+<?= form_open_multipart(base_url('pasien/processEdit'), 'id="formUbahPasien", novalidate'); ?>
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -146,33 +167,51 @@
                     <input type="text" hidden class="form-control id_pasien" name="id_pasien">
                 </div>
                 <div class="form-group">
-                    <label>Nama</label>
-                    <input type="text" class="form-control nama_pasien" name="nama_pasien" placeholder="Masukan Nama" required autofocus value="<?= set_value('nama_pasien') ?>">
+                    <label>Nama Lengkap</label>
+                    <input type="text" class="form-control nama_pasien" name="nama_pasien" placeholder="Masukan Nama Lengkap" required autofocus value="<?= set_value('nama_pasien') ?>">
+                    <div class="invalid-feedback">
+                        Nama lengkap tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
-                    <label>Nama Pengguna</label>
-                    <input type="text" class="form-control username_pasien" name="username_pasien" placeholder="Masukan Nama Pengguna" required autofocus value="<?= set_value('username_pasien') ?>" minlength="8" maxlength="10" title="Username harus 8-10 karakter dan mengandung minimal 1 angka." pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[a-zA-Z]).*$">
+                    <label>Nama Unik</label>
+                    <input type="text" class="form-control username_pasien" name="username_pasien" placeholder="Masukan Nama Unik" required autofocus value="<?= set_value('username_pasien') ?>" minlength="8" maxlength="10" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[a-zA-Z]).*$">
+                    <div class="invalid-feedback">
+                        Nama unik harus 8-10 karakter, mengandung huruf dan minimal 1 angka.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
                     <label>Alamat</label>
                     <textarea type="text" class="form-control alamat_pasien" name="alamat_pasien" placeholder="Masukan Alamat" rows="7" required autofocus value="<?= set_value('alamat_pasien') ?>"></textarea>
+                    <div class="invalid-feedback">
+                        Alamat tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
                     <label>Nomor Telepon</label>
-                    <input type="text" class="form-control no_telp_pasien" name="no_telp_pasien" placeholder="Masukan Nomor Telepon" maxlength="13" required autofocus onkeypress="return hanyaAngka(event)" value="<?= set_value('no_telp_pasien') ?>">
+                    <input type="number" class="form-control no_telp_pasien" name="no_telp_pasien" placeholder="Masukan Nomor Telepon" min="1" maxlength="13" required autofocus onkeypress="return hanyaAngka(event)" value="<?= set_value('no_telp_pasien') ?>">
+                    <div class="invalid-feedback">
+                        Nomor telepon tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
                     <label>Tanggal Lahir</label>
                     <input type="date" class="form-control tanggal_lahir_pasien" name="tanggal_lahir_pasien" id="tanggal_lahir_pasien" placeholder="Pilih Tanggal Lahir" required value="<?= set_value('tanggal_lahir_pasien') ?>">
+                    <div class="invalid-feedback">
+                        Tanggal lahir tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
                     <label>Masukan Umur</label>
-                    <input type="number" class="form-control umur_pasien" name="umur_pasien" id="umur_pasien" required autofocus value="<?= set_value('umur_pasien') ?>">
+                    <input type="number" class="form-control umur_pasien" name="umur_pasien" id="umur_pasien" min="1" required autofocus value="<?= set_value('umur_pasien') ?>">
+                    <div class="invalid-feedback">
+                        Umur tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
@@ -182,6 +221,9 @@
                         <option value="<?php echo 'Perempuan' ?>">Perempuan</option>
                         <option value="<?php echo 'Laki-laki' ?>">Laki-laki</option>
                     </select>
+                    <div class="invalid-feedback">
+                        Jenis kelamin tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
             </div>

@@ -69,7 +69,7 @@
 
 
 <!-- Modal Tambah Dokter -->
-<?= form_open_multipart(base_url('dokter/processTambah')); ?>
+<?= form_open_multipart(base_url('dokter/processTambah'), 'id="formTambahDokter", novalidate'); ?>
 <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -81,16 +81,25 @@
                 <div class="form-group">
                     <label>Nama</label>
                     <input type="text" class="form-control" name="nama_dokter" placeholder="Masukan Nama" required autofocus>
+                    <div class="invalid-feedback">
+                        Nama tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
                     <label>Alamat</label>
                     <textarea type="text" class="form-control" name="alamat_dokter" placeholder="Masukan Alamat" rows="7" required autofocus></textarea>
+                    <div class="invalid-feedback">
+                        Alamat tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
                     <label>Nomor Telepon</label>
-                    <input type="text" class="form-control" name="no_telp_dokter" placeholder="Masukan Nomor Telepon" required autofocus onkeypress="return hanyaAngka(event)">
+                    <input type="number" class="form-control" name="no_telp_dokter" placeholder="Masukan Nomor Telepon" min="1" required autofocus onkeypress="return hanyaAngka(event)">
+                    <div class="invalid-feedback">
+                        Nomor telepon tidak boleh kosong dan 0.
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -103,7 +112,7 @@
 <?= form_close() ?>
 
 <!-- Modal Ubah Dokter-->
-<?= form_open_multipart(base_url('dokter/processEdit')); ?>
+<?= form_open_multipart(base_url('dokter/processEdit'), 'id="formUbahDokter", novalidate'); ?>
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -118,16 +127,25 @@
                 <div class="form-group">
                     <label>Nama</label>
                     <input type="text" class="form-control nama_dokter" name="nama_dokter" placeholder="Masukan Nama" required autofocus>
+                    <div class="invalid-feedback">
+                        Nama tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
                     <label>Alamat</label>
                     <textarea type="text" class="form-control alamat_dokter" name="alamat_dokter" placeholder="Masukan Alamat" rows="7" required autofocus></textarea>
+                    <div class="invalid-feedback">
+                        Alamat tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
                     <label>Nomor Telepon</label>
-                    <input type="text" class="form-control no_telp_dokter" name="no_telp_dokter" placeholder="Masukan Nomor Telepon" required autofocus onkeypress="return hanyaAngka(event)">
+                    <input type="number" class="form-control no_telp_dokter" name="no_telp_dokter" placeholder="Masukan Nomor Telepon" min="1" required autofocus onkeypress="return hanyaAngka(event)">
+                    <div class="invalid-feedback">
+                        Nomor telepon tidak boleh kosong dan 0.
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">

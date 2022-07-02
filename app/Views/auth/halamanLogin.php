@@ -166,24 +166,30 @@
                                         </div>
                                     <?php endif; ?>
 
-                                    <form method="post" action="<?= base_url(); ?>/login/process">
+                                    <form novalidate id="formLogin" method="post" action="<?= base_url(); ?>/login/process">
                                         <?= csrf_field() ?>
                                         <div class="form-group">
                                             <label for="username">Nama Pengguna <b style="color: red; font-size:large;">*</b></label>
                                             <input type="text" name="username" id="username" placeholder="Masukan Nama Pengguna" class="form-control" value="<?= set_value('username') ?>" required autofocus>
+                                            <div class="invalid-feedback">
+                                                Nama pengguna tidak boleh kosong.
+                                            </div>
                                         </div>
                                         <div class="form-group" id="show_hide_password">
                                             <label for="password">Kata Sandi <b style="color: red; font-size:large;">*</b></label>
                                             <div class="input-group">
                                                 <input type="password" name="password" id="password" placeholder="Masukan Kata Sandi" class="form-control" value="<?= set_value('password') ?>" required style="display: inline-block;">
                                                 <div class="input-group-append">
-                                                    <span id="mybutton" onclick="showHidePassword()" class="input-group-text">
+                                                    <span id="mybutton" onclick="showHidePassword()" class="input-group-text" style="border-radius: 3px;">
                                                         <!-- icon mata bawaan bootstrap  -->
                                                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
                                                             <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
                                                         </svg>
                                                     </span>
+                                                </div>
+                                                <div class="invalid-feedback">
+                                                    Kata sandi tidak boleh kosong.
                                                 </div>
                                             </div>
                                         </div>
@@ -238,6 +244,28 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
+        $(document).ready(function() {
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function() {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('#formLogin')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms).forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+            })()
+        });
+
         window.setTimeout(function() {
             $(".alert").fadeTo(100, 1).slideUp(1000, function() {
                 $(this).remove();

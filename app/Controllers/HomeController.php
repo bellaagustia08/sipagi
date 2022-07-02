@@ -373,7 +373,7 @@ class HomeController extends BaseController
         $data['gejala'] = $this->gejala->findAll();
         $data['pasien'] = $temp_pasien;
 
-        session()->destroy();
+        // session()->destroy();
         return view('main/download/cetakDownload', $data);
     }
 

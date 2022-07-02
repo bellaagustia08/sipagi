@@ -352,6 +352,8 @@
                 var formsUbahDokter = document.querySelectorAll('#formUbahDokter')
                 var formsTambahJadwal = document.querySelectorAll('#formTambahJadwal')
                 var formsUbahJadwal = document.querySelectorAll('#formUbahJadwal')
+                var formsUbahDataProfil = document.querySelectorAll('#formUbahDataProfil')
+                var formsUbahKataSandi = document.querySelectorAll('#formUbahKataSandi')
 
                 // Loop over them and prevent submission
                 Array.prototype.slice.call(formsTambahPasien).forEach(function(form) {
@@ -410,6 +412,28 @@
                 })
 
                 Array.prototype.slice.call(formsUbahDokter).forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+
+                Array.prototype.slice.call(formsUbahDataProfil).forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+
+                Array.prototype.slice.call(formsUbahKataSandi).forEach(function(form) {
                     form.addEventListener('submit', function(event) {
                         if (!form.checkValidity()) {
                             event.preventDefault()

@@ -39,7 +39,7 @@
                 </div>
             <?php endif; ?>
 
-            <form method="post" action="<?= base_url(); ?>/ubahKataSandi/processUbahKataSandi">
+            <form novalidate id="formUbahKataSandi" method="post" action="<?= base_url(); ?>/ubahKataSandi/processUbahKataSandi">
                 <?= csrf_field() ?>
                 <div class="form-group" hidden>
                     <input type="text" class="form-control" name="id_user" value="<?php echo $tempIdUser ?>">
@@ -53,7 +53,7 @@
                 <div class="form-group" id="sandi_lama">
                     <label for="password_lama"><b>Kata Sandi Lama</b></label>
                     <div class="input-group">
-                        <input type="password" name="password_lama" id="password_lama" placeholder="Masukan Kata Sandi Lama" class="form-control" value="<?= set_value('password_lama') ?>" required minlength="8" maxlength="16" title="Kata sandi harus 8-16 karakter, dan mengandung min. 1 huruf besar, 1 huruf kecil, 1 angka." pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" style="display: inline-block;">
+                        <input type="password" name="password_lama" id="password_lama" placeholder="Masukan Kata Sandi Lama" class="form-control" value="<?= set_value('password_lama') ?>" required minlength="8" maxlength="16" title="Kata sandi harus 8-16 karakter, dan mengandung minimal 1 huruf besar, 1 huruf kecil, 1 angka." pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" style="display: inline-block;">
                         <div class="input-group-append">
                             <span id="mybutton" onclick="showHidePasswordLama()" class="input-group-text">
                                 <svg width="1em" height="2em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -62,6 +62,9 @@
                                 </svg>
                             </span>
                         </div>
+                        <div class="invalid-feedback">
+                            Kata sandi lama tidak boleh kosong
+                        </div>
                     </div>
                 </div>
                 <br>
@@ -69,7 +72,7 @@
                 <div class="form-group" id="sandi_baru">
                     <label for="password_baru"><b>Kata Sandi Baru</b></label>
                     <div class="input-group">
-                        <input type="password" name="password_baru" id="password_baru" value="<?= set_value('password_baru') ?>" placeholder="Masukan Kata Sandi Baru" class="form-control" required minlength="8" maxlength="16" title="Kata sandi harus 8-16 karakter, dan mengandung min. 1 huruf besar, 1 huruf kecil, 1 angka." pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" style="display: inline-block;">
+                        <input type="password" name="password_baru" id="password_baru" value="<?= set_value('password_baru') ?>" placeholder="Masukan Kata Sandi Baru" class="form-control" required minlength="8" maxlength="16" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" style="display: inline-block;">
                         <div class="input-group-append">
                             <span id="mybutton_baru" onclick="showHidePasswordBaru()" class="input-group-text">
                                 <svg width="1em" height="2em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -78,6 +81,9 @@
                                 </svg>
                             </span>
                         </div>
+                        <div class="invalid-feedback">
+                            Kata sandi harus 8-16 karakter, dan mengandung min. 1 huruf besar, 1 huruf kecil, 1 angka.
+                        </div>
                     </div>
                 </div>
                 <br>
@@ -85,7 +91,7 @@
                 <div class="form-group" id="sandi_konfirmasi">
                     <label for="password_konfirmasi"><b>Konfirmasi Kata Sandi Baru</b></label>
                     <div class="input-group">
-                        <input type="password" name="password_konfirmasi" id="password_konfirmasi" value="<?= set_value('password_konfirmasi') ?>" placeholder="Masukan Konfirmasi Kata Sandi Baru" class="form-control" required minlength="8" maxlength="16" title="Kata sandi harus 8-16 karakter, dan mengandung min. 1 huruf besar, 1 huruf kecil, 1 angka." pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" style="display: inline-block;">
+                        <input type="password" name="password_konfirmasi" id="password_konfirmasi" value="<?= set_value('password_konfirmasi') ?>" placeholder="Masukan Konfirmasi Kata Sandi Baru" class="form-control" required minlength="8" maxlength="16" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" style="display: inline-block;">
                         <div class="input-group-append">
                             <span id="mybutton_konfirmasi" onclick="showHidePasswordKonfirmasi()" class="input-group-text">
                                 <svg width="1em" height="2em" viewBox="0 0 16 16" class="bi bi-eye-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -93,6 +99,9 @@
                                     <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
                                 </svg>
                             </span>
+                        </div>
+                        <div class="invalid-feedback">
+                            Kata sandi harus 8-16 karakter, dan mengandung min. 1 huruf besar, 1 huruf kecil, 1 angka.
                         </div>
                     </div>
                 </div>

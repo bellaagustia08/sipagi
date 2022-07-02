@@ -55,7 +55,7 @@
 
 
 <!-- modal edit profil -->
-<?= form_open_multipart(base_url('profil/processEditProfil')); ?>
+<?= form_open_multipart(base_url('profil/processEditProfil'), 'id="formUbahDataProfil", novalidate'); ?>
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -78,16 +78,25 @@
                 <div class="form-group">
                     <label for="nama">Nama Lengkap</label>
                     <input type="text" class="form-control nama" name="nama" id="nama" placeholder="Masukan Nama Lengkap" required autofocus>
+                    <div class="invalid-feedback">
+                        Nama lengkap tidak boleh kosong.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
                     <label for="username">Nama Pengguna</label>
-                    <input type="text" class="form-control username" name="username" id="username" placeholder="Masukan Nama Pengguna" required autofocus minlength="8" maxlength="10" title="Username harus 8-10 karakter dan mengandung minimal 1 angka." pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[a-zA-Z]).*$">
+                    <input type="text" class="form-control username" name="username" id="username" placeholder="Masukan Nama Pengguna" required autofocus minlength="8" maxlength="10" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[a-zA-Z]).*$">
+                    <div class="invalid-feedback">
+                        Nama pengguna harus 8-10 karakter dan mengandung huruf dan minimal 1 angka.
+                    </div>
                 </div>
                 <br>
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" class="form-control email" name="email" id="email" placeholder="Masukan Email" required autofocus>
+                    <div class="invalid-feedback">
+                        Email tidak boleh kosong.
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">

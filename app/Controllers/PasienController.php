@@ -60,7 +60,7 @@ class PasienController extends BaseController
             session()->setFlashdata('success', 'Data Berhasil di tambah');
             return redirect()->to('/pasien');
         } else {
-            session()->setFlashdata('warning', 'Username sudah digunakan! Masukan username lain.');
+            session()->setFlashdata('warning', 'Nama unik sudah digunakan! Masukan nama unik lain.');
             return view('admin/pasien/index');
         }
     }
@@ -95,7 +95,7 @@ class PasienController extends BaseController
             session()->setFlashdata('success', 'Data Berhasil di ubah');
             return redirect()->to('/pasien');
         } else {
-            session()->setFlashdata('warning', 'Username sudah digunakan! Masukan username lain.');
+            session()->setFlashdata('warning', 'Nama unik sudah digunakan! Masukan nama unik lain.');
             return redirect()->to('/pasien');
         }
     }

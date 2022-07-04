@@ -215,7 +215,7 @@
                 </div>
                 <br>
                 <div class="form-group">
-                    <label>Pilih Jenis Kelamin</label>
+                    <label>Jenis Kelamin</label>
                     <select name="jenis_kelamin_pasien" id="jenis_kelamin_pasien" class="selectpicker form-control jenis_kelamin_pasien" data-live-search="true" required autofocus value="<?= set_value('jenis_kelamin_pasien') ?>">
                         <option value="<?php echo '' ?>" selected>Pilih Jenis Kelamin</option>
                         <option value="<?php echo 'Perempuan' ?>">Perempuan</option>

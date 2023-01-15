@@ -6,6 +6,9 @@ use App\Models\UsersModel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+use \AllowDynamicProperties;
+#[AllowDynamicProperties]
+
 class UserController extends BaseController
 {
     protected $user;

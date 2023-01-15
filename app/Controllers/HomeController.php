@@ -13,6 +13,8 @@ use App\Models\JadwalModel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+use \AllowDynamicProperties;
+#[AllowDynamicProperties]
 class HomeController extends BaseController
 {
     public function __construct()

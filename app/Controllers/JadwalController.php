@@ -7,6 +7,10 @@ use App\Models\DokterModel;
 use App\Models\PasienModel;
 use App\Models\JadwalModel;
 
+use \AllowDynamicProperties;
+
+#[AllowDynamicProperties]
+
 class JadwalController extends BaseController
 {
     protected $jadwal;

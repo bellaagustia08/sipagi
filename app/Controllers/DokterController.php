@@ -7,6 +7,10 @@ use App\Models\DokterModel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+use \AllowDynamicProperties;
+
+#[AllowDynamicProperties]
+
 class DokterController extends BaseController
 {
     protected $dokter;

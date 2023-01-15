@@ -7,6 +7,10 @@ use App\Models\GejalaModel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+use \AllowDynamicProperties;
+
+#[AllowDynamicProperties]
+
 class GejalaController extends BaseController
 {
     protected $gejala;

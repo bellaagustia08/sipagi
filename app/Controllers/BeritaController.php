@@ -7,6 +7,10 @@ use App\Models\BeritaModel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+use \AllowDynamicProperties;
+
+#[AllowDynamicProperties]
+
 class BeritaController extends BaseController
 {
     protected $berita;

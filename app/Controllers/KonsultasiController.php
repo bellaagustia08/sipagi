@@ -11,6 +11,10 @@ use App\Models\PasienModel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+use \AllowDynamicProperties;
+
+#[AllowDynamicProperties]
+
 class KonsultasiController extends BaseController
 {
     protected $konsultasi;

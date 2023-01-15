@@ -10,6 +10,10 @@ use App\Models\GejalaModel;
 use App\Models\PenyakitModel;
 use App\Models\AturanModel;
 
+use \AllowDynamicProperties;
+
+#[AllowDynamicProperties]
+
 class Login extends BaseController
 {
     public function __construct()

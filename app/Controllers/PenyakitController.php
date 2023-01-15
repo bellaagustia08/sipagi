@@ -8,6 +8,10 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Google\Cloud\Firestore\FirestoreClient;
 
+use \AllowDynamicProperties;
+
+#[AllowDynamicProperties]
+
 class PenyakitController extends BaseController
 {
     protected $penyakit;

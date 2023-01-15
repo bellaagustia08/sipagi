@@ -4,6 +4,10 @@ namespace App\Controllers;
 
 use App\Models\UsersModel;
 
+use \AllowDynamicProperties;
+
+#[AllowDynamicProperties]
+
 class RegistrasiController extends BaseController
 {
     public function __construct()

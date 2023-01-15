@@ -9,6 +9,9 @@ use App\Models\AturanModel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+use \AllowDynamicProperties;
+#[AllowDynamicProperties]
+
 class AturanController extends BaseController
 {
     protected $aturan;
